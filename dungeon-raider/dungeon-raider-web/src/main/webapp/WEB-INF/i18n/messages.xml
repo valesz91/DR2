@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="main.title">Dungeon Raider</entry>
+	<entry key="application.title">Dungeon Raider</entry>
+	<entry key="menu.settings">Settings</entry>
+	<entry key="menu.users">Users</entry>
+	<entry key="menu.admin">Admin menu</entry>
+
+	<entry key="login.login">Login</entry>
+	<entry key="login.name">Name</entry>
+	<entry key="login.password">Password</entry>
+	<entry key="login.newCharacter">New character</entry>
+
+	<entry key="characters.basicInformation">Basic informations</entry>
+	<entry key="characters.basicStats">Basic statistics</entry>
+	<entry key="characters.strength">Strength</entry>
+	<entry key="characters.dexterity">Dexterity</entry>
+	<entry key="characters.health">Health</entry>
+	<entry key="characters.basicStatHint">You have 10 point which you can spend this attributes
+		below.</entry>
+	<entry key="characters.create">Create character</entry>
+	<entry key="characters.quickness">Quickness</entry>
+	<entry key="characters.exp">Experience Points </entry>
+	<entry key="characters.race">Race</entry>
+	<entry key="characters.atkPoints">Attack Points</entry>
+	<entry key="characters.defPoints">Defense Points</entry>
+	<entry key="characters.healthPoints">Healt Points</entry>
+	<entry key="characters.damagePoints">Damage points</entry>
+	<entry key="characters.maxLoadCapacity">Maximum load capacity</entry>
+	<entry key="characters.inventory">Inventory</entry>
+	<entry key="characters.carrying">Inventory informations</entry>
+	<entry key="characters.combatStatistics">Combat statistics</entry>
+	<entry key="characters.equippedItems">Equipped Items</entry>
+
+	<entry key="menu.shop">Shop</entry>
+	<entry key="menu.toTheDungeon">To the Dungeon!</entry>
+
+	<entry key="item.gold">Gold</entry>
+	<entry key="item.weight">Weight</entry>
+	<entry key="item.type">Type</entry>
+	<entry key="item.item">Item</entry>
+	<entry key="item.value">Value</entry>
+	<entry key="item.drop">Drop</entry>
+	<entry key="item.equip">Equip</entry>
+
+	<entry key="item.shield">Shield</entry>
+	<entry key="item.weapon">Weapon</entry>
+	<entry key="item.armor">Armor</entry>
+	<entry key="item.attackPointsPlus">Attack Points Plus</entry>
+	<entry key="item.attackPoint">Attack Points</entry>
+	<entry key="item.attackPointsMinus"> Attack Points Minus</entry>
+	<entry key="item.defendPointsPlus">Defend Points Plus</entry>
+	<entry key="item.defendPoints">Defend Points</entry>
+
+	<entry key="item.defendPointsMinus">Defend Points Minus</entry>
+	<entry key="item.health">Health</entry>
+	<entry key="item.damage">Damage</entry>
+	<entry key="item.attackPoints">Attack Points</entry>
+	<entry key="item.healthPointPlus">Healt Point Plus</entry>
+
+	<entry key="shop.weapons">Weapons</entry>
+	<entry key="shop.potions">Potions</entry>
+	<entry key="shop.shields">Shields</entry>
+	<entry key="shop.armors">Armors</entry>
+	
+	<entry key="shop.buyAndEquip">Buy And Equip</entry>
+	<entry key="shop.buy">Buy</entry>
+	<entry key="shop.view">View</entry>
+
+	<entry key="general.opportunities">Opportunities</entry>
+
+	<entry key="inventory.itemWeights">Actual weights of your items </entry>
+	
+	<entry key="general.any">Any</entry>
+	<entry key="genearl.canBuy">Only if i can buy</entry>
+	<entry key="menu.edit">Stats</entry>
+	<entry key="shop.canBuy">Only Buyable</entry>
+
+</properties>

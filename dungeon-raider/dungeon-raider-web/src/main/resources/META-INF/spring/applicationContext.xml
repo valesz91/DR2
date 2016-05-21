@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<context:annotation-config />
+	<context:property-placeholder  location="file:${DUNGEON_HOME}/settings/datasource.properties  ,file:${DUNGEON_HOME}/settings/logger.properties" />
+
+	<!-- Persistence beans -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close" p:driverClass="com.mysql.jdbc.Driver" p:jdbcUrl="jdbc:mysql://${datasource.host}:${datasource.port}/${datasource.database}?characterEncoding=UTF-8" p:user="${datasource.user}" p:password="${datasource.password}" p:acquireIncrement="1" p:minPoolSize="10" p:initialPoolSize="20" p:maxPoolSize="25" p:maxConnectionAge="1800" p:maxIdleTime="600" p:preferredTestQuery="select 1" p:idleConnectionTestPeriod="400" p:unreturnedConnectionTimeout="300" p:debugUnreturnedConnectionStackTraces="true" />
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" p:configLocation="classpath:hibernate.cfg.xml" p:dataSource-ref="dataSource">
+		<property name="hibernateProperties">
+			<value>
+				hibernate.cache.provider_class=org.hibernate.cache.EhCacheProvider
+				hibernate.cache.provider_configuration_file_resource_path=ehcache.xml
+				hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+				hibernate.hbm2ddl.auto=
+				hibernate.show_sql=false
+			</value>
+		</property>
+	</bean>
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" p:sessionFactory-ref="sessionFactory" />
+	<tx:annotation-driven />
+	
+	<!-- DAO beans -->
+	<bean class="hu.inf.unideb.dungeonraider.dao.impl.ItemDaoImpl" p:sessionFactory-ref="sessionFactory" />
+	<bean class="hu.inf.unideb.dungeonraider.dao.impl.MonsterDaoImpl" p:sessionFactory-ref="sessionFactory" />
+	<bean class="hu.inf.unideb.dungeonraider.dao.impl.PlayersCharacterDaoImpl" p:sessionFactory-ref="sessionFactory" />
+
+	<!-- Service beans -->
+	<bean class="hu.inf.unideb.dungeonraider.service.impl.ItemServiceImpl" />
+	<bean class="hu.inf.unideb.dungeonraider.service.impl.MonsterServiceImpl" />
+	<bean class="hu.inf.unideb.dungeonraider.service.impl.PlayerServiceImpl" />
+</beans>

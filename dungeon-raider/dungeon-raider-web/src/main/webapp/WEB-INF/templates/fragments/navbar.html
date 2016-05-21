@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<!-- Navbar with menu -->
+
+	<nav class="navbar navbar-default navbar-fixed-top" data-th-fragment="navbar">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ad-navbar-collapse">
+					<span class="sr-only" data-th-text="#{menu.toggleNavigation}">Toggle navigation</span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<h4 style="vertical-align: text-bottom;">
+					<a style="text-decoration: none; color: black;" data-th-href="@{/}" href="#"><span><img
+							data-th-src="@{/resources/images/sword.png}" /></span> Dungeon Raider</a>
+				</h4>
+			</div>
+
+			<div class="collapse navbar-collapse" id="ad-navbar-collapse">
+				<!-- data-sec-authorize="isAuthenticated()"  -->
+				<ul class="nav navbar-nav navbar-right" role="navigation">
+					
+<!-- 				<span>	<img		data-th-src="@{/resources/images/sack.png}" /></span> -->
+					<li><a href="#" data-th-href="@{/shop/items.html(id=${playerCharacter.id})}">
+					 <span data-th-text="#{menu.shop}">Shop</span></a></li>
+					 <li><a href="#" data-th-href="@{/characters/edit.html(id=${playerCharacter.id})}">
+					 <span data-th-text="#{menu.edit}">Shop</span></a></li>
+					<li><a href="#" data-th-href="@{/dungeon.html}"><span
+							data-th-text="#{menu.toTheDungeon}">To the dungeon!</span></a></li>
+				</ul>
+			</div>
+		</div>
+
+	</nav>
+</body>
+
+</html>

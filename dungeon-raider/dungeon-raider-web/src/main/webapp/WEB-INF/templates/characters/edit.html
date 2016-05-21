@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title data-th-text="#{application.title}">Dungeon Raider</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link data-th-href="@{/resources/images/favicon.png}" href="../../images/favicon.png" type="image/png" rel="shortcut icon" />
+<link data-th-href="@{/resources/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" rel="stylesheet"></link>
+<link data-th-href="@{/resources/css/bootstrap-theme.min.css}" href="../../css/bootstrap-theme.min.css" rel="stylesheet"></link>
+<link data-th-href="@{/resources/css/toastr.min.css}" href="../../css/toastr.min.css" rel="stylesheet"></link>
+<link data-th-href="@{/resources/css/theme.css}" href="../../css/theme.css" rel="stylesheet"></link>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+	<div class="container">
+	<nav data-th-replace="fragments/navbar :: navbar"></nav>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h1 align="center" th:text="#{main.title}">r</h1>
+				<form data-th-object="${form}" action="#" data-th-action="@{/characters/edit.html}" method="post">
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<span data-th-text="#{characters.basicInformation}"></span>
+								</div>
+								<div class="panel-body">
+									<div class="row"></div>
+									<div
+										th:replace="fragments/forminput :: simple-row(field='name', fieldSize='col-xs-9', label=#{login.name}, labelSize='col-xs-3', required=true)"></div>
+									<div
+										th:replace="fragments/forminput :: simple-row(field='actualExp', fieldSize='col-xs-9', label=#{characters.exp}, labelSize='col-xs-3', required=true)"></div>
+									<div
+										th:replace="fragments/forminput :: simple-row(field='race', fieldSize='col-xs-9', label=#{characters.race}, labelSize='col-xs-3', required=true)"></div>
+
+
+								</div>
+							</div>
+
+
+						</div>
+						<div class="col-xs-6">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<span data-th-text="#{characters.equippedItems}"></span>
+								</div>
+								<div class="panel-body">
+									<br /> <br />
+									<div
+										th:replace="fragments/forminput :: simple-rowName(field='actualWeapon', fieldSize='col-xs-3', label=#{item.weapon}, labelSize='col-xs-6', required=true)"></div>
+									<div
+										th:replace="fragments/forminput :: simple-rowName(field='actualShield', fieldSize='col-xs-3', label=#{item.shield}, labelSize='col-xs-6', required=true)"></div>
+									<div
+										th:replace="fragments/forminput :: simple-rowName(field='actualArmor', fieldSize='col-xs-3', label=#{item.armor}, labelSize='col-xs-6', required=true)"></div>
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<span data-th-text="#{characters.basicStats}"></span>
+								</div>
+								<div class="panel-body">
+									<br /> <br />
+									<div
+										th:replace="fragments/forminput :: simple-row(field='strength', fieldSize='col-xs-3', label=#{characters.strength}, labelSize='col-xs-6', required=true)"></div>
+									<div
+										th:replace="fragments/forminput :: simple-row(field='dexterity', fieldSize='col-xs-3', label=#{characters.dexterity}, labelSize='col-xs-6', required=true)"></div>
+									<div
+										th:replace="fragments/forminput :: simple-row(field='health', fieldSize='col-xs-3', label=#{characters.health}, labelSize='col-xs-6', required=true)"></div>
+									<div
+										th:replace="fragments/forminput :: simple-row(field='quickness', fieldSize='col-xs-3', label=#{characters.quickness}, labelSize='col-xs-6', required=true, id='quickness')"></div>
+
+								</div>
+							</div>
+
+
+						</div>
+						<div class="col-xs-6">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<span data-th-text="#{characters.combatStatistics}"></span>
+								</div>
+								<div class="panel-body">
+									<br /> <br />
+									<div
+										th:replace="fragments/forminput :: simple-row(field='attackPoints', fieldSize='col-xs-3', label=#{characters.atkPoints}, labelSize='col-xs-6', required=true)"></div>
+									<div
+										th:replace="fragments/forminput :: simple-row(field='defendPoints', fieldSize='col-xs-3', label=#{characters.defPoints}, labelSize='col-xs-6', required=true)"></div>
+									<div
+										th:replace="fragments/forminput :: simple-row(field='healthPoint', fieldSize='col-xs-3', label=#{characters.healthPoints}, labelSize='col-xs-6', required=true)"></div>
+									<div
+										th:replace="fragments/forminput :: simple-row(field='damagePoints', fieldSize='col-xs-3', label=#{characters.damagePoints}, labelSize='col-xs-6', required=true, id='quickness')"></div>
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<span data-th-text="#{characters.carrying}"></span>
+								</div>
+								<div class="panel-body">
+									<br /> <br />
+									<div
+										th:replace="fragments/forminput :: simple-row(field='gold', fieldSize='col-xs-3', label=#{item.gold}, labelSize='col-xs-6', required=true)"></div>
+									<div
+										th:replace="fragments/forminput :: simple-row(field='loadCapacity', fieldSize='col-xs-3', label=#{characters.maxLoadCapacity}, labelSize='col-xs-6', required=true)"></div>
+<!-- 									<div -->
+<!-- 										th:replace="fragments/forminput :: simple-row(field='${itemsWeights}', fieldSize='col-xs-3', label=#{inventory.itemWeights}, labelSize='col-xs-6', required=true)"></div> -->
+
+								</div>
+							</div>
+
+
+						</div>
+						<div class="col-xs-6">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<span data-th-text="#{characters.inventory}"></span>
+								</div>
+								<div class="panel-body">
+									<table class="table table-hover table-condensed">
+										<thead>
+											<tr>
+												<th class="col-xs-2" data-th-text="#{item.item}">Item</th>
+												<th class="col-xs-2" data-th-text="#{item.value}">Value</th>
+												<th class="col-xs-2" data-th-text="#{item.weight}">Weight</th>
+												<th class="col-xs-1" data-th-text="#{item.type}">Type</th>
+												<th class="col-xs-3" data-th-text="#{general.opportunities}">Opportunities</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr data-th-each="item: *{inventory}">
+												<td data-th-text="${item.name}">Name</td>
+												<td data-th-text="${item.value}">Value</td>
+												<td data-th-text="${item.weight}">Value</td>
+												<!-- 								TODO		make it labelled! -->
+												<td data-th-text="${item.type}">type</td>
+												<td><div class="btn-group" role="group">
+														<a th:href="@{/characters/equip.html(id=${item.id}, type=${item.type})}" href="#" class="btn btn-xs btn-info"><span th:text="#{item.equip}"></span></a>
+														<a th:href="@{/characters/drop.html(id=${item.id}, type=${item.type})}" class="btn btn-xs btn-default" href="#"><span th:text="#{item.drop}"></span></a>
+<!-- 														<a class="btn btn-default btn-xs" data-toggle="modal" data-target="#viewModal" data-entity="${item}" data-th-text="#{shop.view}" role="button"><span th:text="#{item.view}"></span></a> -->
+													</div></td>
+											</tr>
+											<tr data-th-each="item: *{weapons}">
+												<td data-th-text="${item.name}">Name</td>
+												<td data-th-text="${item.value}">Value</td>
+												<td data-th-text="${item.weight}">Value</td>
+												<!-- 								TODO		make it labelled! -->
+												<td data-th-text="${item.type}">type</td>
+												<td><a th:href="@{/characters/equip.html(id=${item.id}, type=${item.type})}" href="#" class="btn btn-xs btn-info"><span
+														th:text="#{item.equip}"></span></a> <a th:href="@{/characters/drop.html(id=${item.id}, type=${item.type})}"
+													class="btn btn-xs btn-default" href="#"><span th:text="#{item.drop}"></span></a> <!-- 														<a class="btn btn-default btn-xs" data-toggle="modal" data-target="#viewModal" data-entity="${item}" data-th-text="#{shop.view}" role="button"><span th:text="#{item.view}"></span></a> -->
+
+												</td>
+											</tr>
+											<tr data-th-each="item: *{armors}">
+												<td data-th-text="${item.name}">Name</td>
+												<td data-th-text="${item.value}">Value</td>
+												<td data-th-text="${item.weight}">Value</td>
+												<!-- 								TODO		make it labelled! -->
+												<td data-th-text="${item.type}">type</td>
+																			<td><a th:href="@{/characters/equip.html(id=${item.id}, type=${item.type})}" href="#" class="btn btn-xs btn-info"><span
+														th:text="#{item.equip}"></span></a> <a th:href="@{/characters/drop.html(id=${item.id}, type=${item.type})}"
+													class="btn btn-xs btn-default" href="#"><span th:text="#{item.drop}"></span></a> <!-- 														<a class="btn btn-default btn-xs" data-toggle="modal" data-target="#viewModal" data-entity="${item}" data-th-text="#{shop.view}" role="button"><span th:text="#{item.view}"></span></a> -->
+
+												</td>
+											</tr>
+											<tr data-th-each="item: *{potions}">
+												<td data-th-text="${item.name}">Name</td>
+												<td data-th-text="${item.value}">Value</td>
+												<td data-th-text="${item.weight}">Value</td>
+												<!-- 								TODO		make it labelled! -->
+												<td data-th-text="${item.type}">type</td>
+																			<td><a th:href="@{/characters/equip.html(id=${item.id}, type=${item.type})}" href="#" class="btn btn-xs btn-info"><span
+														th:text="#{item.equip}"></span></a> <a th:href="@{/characters/drop.html(id=${item.id}, type=${item.type})}"
+													class="btn btn-xs btn-default" href="#"><span th:text="#{item.drop}"></span></a> <!-- 														<a class="btn btn-default btn-xs" data-toggle="modal" data-target="#viewModal" data-entity="${item}" data-th-text="#{shop.view}" role="button"><span th:text="#{item.view}"></span></a> -->
+
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+		<script type="text/javascript" data-th-src="@{/resources/js/jquery.min.js}" src="js/jquery.min.js"></script>
+	<script type="text/javascript" data-th-src="@{/resources/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" data-th-src="@{/resources/js/toastr.min.js}" src="js/toastr.min.js"></script>
+	<script type="text/javascript" data-th-src="@{/resources/js/popovers.js}" src="../../js/popovers.js"></script>
+	
+	<script data-th-if="${errorMsg}" data-th-inline="javascript" type="text/javascript">
+		toastr.error([[#{${errorMsg}}]], [[#{general.notifierError}]]);
+	</script>
+	<script data-th-if="${successMsg}" data-th-inline="javascript" type="text/javascript">
+	/*<![CDATA[*/
+		toastr.success([[#{${successMsg}}]], [[#{general.notifierSuccess}]]);
+	/*]]>*/
+	</script>
+</body>
+</html>

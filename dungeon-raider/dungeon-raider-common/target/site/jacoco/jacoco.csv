@@ -1,0 +1,7 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Dungeon Raider Common Module,hu.inf.unideb.dungeonraider.dao.impl,ItemDaoImpl,101,102,5,3,21,28,11,10,7,10
+Dungeon Raider Common Module,hu.inf.unideb.dungeonraider.dao.impl,MonsterDaoImpl,14,3,0,0,3,1,1,1,1,1
+Dungeon Raider Common Module,hu.inf.unideb.dungeonraider.dao.impl,PlayersCharacterDaoImpl,0,68,0,0,0,17,0,6,0,6
+Dungeon Raider Common Module,hu.inf.unideb.dungeonraider.service.impl,MonsterServiceImpl,0,3,0,0,0,1,0,1,0,1
+Dungeon Raider Common Module,hu.inf.unideb.dungeonraider.service.impl,ItemServiceImpl,346,3,35,0,96,1,26,1,7,1
+Dungeon Raider Common Module,hu.inf.unideb.dungeonraider.service.impl,PlayerServiceImpl,730,3,54,0,144,1,37,1,7,1

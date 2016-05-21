@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="hu.inf.unideb.dungeonraider.domain">
+	<class name="PlayersCharacter">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="name" length="240" />
+		<property name="password" length="40" />
+		<property name="strength" length="20" />
+		<property name="dexterity" length="20" />
+		<property name="health" length="20" />
+		<property name="quickness" length="20" />
+		<property name="loadCapacity" length="20" />
+		<property name="actualExp" length="20" />
+
+		<property name="attackPoints" length="20" />
+		<property name="defendPoints" length="20" />
+		<property name="healthPoint" length="20" />
+		<property name="gold" length="20" />
+		<property name="damagePoints" length="20"></property>
+
+		<many-to-one name="actualWeapon" class="Weapon"
+			foreign-key="fk_playersCharacterActualWeapon" />
+		<many-to-one name="actualShield" class="Shield"
+			foreign-key="fk_playersCharacterActualShield" />
+		<many-to-one name="actualArmor" class="Armor"
+			foreign-key="fk_playersCharacterActualArmor" />
+		<many-to-one name="position" class="MapElement"
+			foreign-key="fk_playersCharacterMapElement" />
+
+		<property name="race" length="40">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">hu.inf.unideb.dungeonraider.domain.Race</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		
+		<bag name="inventory" lazy="false" fetch="select" inverse="true">
+			<key column="playersCharacter" />
+			<one-to-many class="Item" />
+		</bag>
+		
+		<bag name="shields" table="playersCharacter_shield" 
+        	inverse="false" lazy="true" fetch="select" cascade="all" >
+            <key>
+                <column name="playersCharacter_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="hu.inf.unideb.dungeonraider.domain.Shield">
+                <column name="shield_id" not-null="true" />
+            </many-to-many>
+        </bag>
+        
+        <bag name="armors" table="playersCharacter_armor" 
+        	inverse="false" lazy="true" fetch="select" cascade="all" >
+            <key>
+                <column name="playersCharacter_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="hu.inf.unideb.dungeonraider.domain.Armor">
+                <column name="armor_id" not-null="true" />
+            </many-to-many>
+        </bag>
+        
+           <bag name="potions" table="playersCharacter_potion" 
+        	inverse="false" lazy="true" fetch="select" cascade="all" >
+            <key>
+                <column name="playersCharacter_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="hu.inf.unideb.dungeonraider.domain.Potion">
+                <column name="potion_id" not-null="true" />
+            </many-to-many>
+        </bag>
+        
+           <bag name="weapons" table="playersCharacter_weapon" 
+        	inverse="false" lazy="true" fetch="select" cascade="all" >
+            <key>
+                <column name="playersCharacter_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="hu.inf.unideb.dungeonraider.domain.Weapon">
+                <column name="weapon_id" not-null="true" />
+            </many-to-many>
+        </bag>
+		
+
+	</class>
+</hibernate-mapping>

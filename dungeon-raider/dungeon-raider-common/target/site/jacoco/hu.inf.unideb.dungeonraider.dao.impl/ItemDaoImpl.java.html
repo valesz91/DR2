@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ItemDaoImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Dungeon Raider Common Module</a> &gt; <a href="index.source.html" class="el_package">hu.inf.unideb.dungeonraider.dao.impl</a> &gt; <span class="el_source">ItemDaoImpl.java</span></div><h1>ItemDaoImpl.java</h1><pre class="source lang-java linenums">package hu.inf.unideb.dungeonraider.dao.impl;
+
+import java.util.List;
+
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import hu.inf.unideb.dungeonraider.dao.ItemDao;
+import hu.inf.unideb.dungeonraider.domain.Armor;
+import hu.inf.unideb.dungeonraider.domain.Potion;
+import hu.inf.unideb.dungeonraider.domain.Shield;
+import hu.inf.unideb.dungeonraider.domain.Weapon;
+
+<span class="fc" id="L17">public class ItemDaoImpl extends HibernateDaoSupport implements ItemDao {</span>
+
+	@Override
+	public int countArmors() {
+
+<span class="nc" id="L22">		DetachedCriteria criteria = DetachedCriteria.forClass(Armor.class);</span>
+<span class="nc" id="L23">		return DataAccessUtils.intResult(getHibernateTemplate().findByCriteria(criteria.setProjection(Projections.rowCount())));</span>
+
+	}
+
+	@Override
+	public int countWeapons() {
+
+<span class="nc" id="L30">		DetachedCriteria criteria = DetachedCriteria.forClass(Weapon.class);</span>
+<span class="nc" id="L31">		return DataAccessUtils.intResult(getHibernateTemplate().findByCriteria(criteria.setProjection(Projections.rowCount())));</span>
+
+	}
+
+	@Override
+	public int countShields() {
+
+<span class="nc" id="L38">		DetachedCriteria criteria = DetachedCriteria.forClass(Shield.class);</span>
+<span class="nc" id="L39">		return DataAccessUtils.intResult(getHibernateTemplate().findByCriteria(criteria.setProjection(Projections.rowCount())));</span>
+
+	}
+
+	@Override
+	public int countPotions() {
+
+<span class="nc" id="L46">		DetachedCriteria criteria = DetachedCriteria.forClass(Potion.class);</span>
+<span class="nc" id="L47">		return DataAccessUtils.intResult(getHibernateTemplate().findByCriteria(criteria.setProjection(Projections.rowCount())));</span>
+
+	}
+
+	@Override
+	public Armor findArmorById(int id) {
+<span class="fc" id="L53">		Armor armor = getHibernateTemplate().get(Armor.class, id);</span>
+<span class="fc" id="L54">		getHibernateTemplate().initialize(armor);</span>
+<span class="fc" id="L55">		return armor;</span>
+	}
+
+	@Override
+	public Weapon findWeaponById(int id) {
+<span class="fc" id="L60">		Weapon weapon = getHibernateTemplate().get(Weapon.class, id);</span>
+<span class="fc" id="L61">		getHibernateTemplate().initialize(weapon);</span>
+<span class="fc" id="L62">		return weapon;</span>
+	}
+
+	@Override
+	public Potion findPotionById(int id) {
+<span class="nc" id="L67">		Potion potion = getHibernateTemplate().get(Potion.class, id);</span>
+<span class="nc" id="L68">		getHibernateTemplate().initialize(potion);</span>
+<span class="nc" id="L69">		return potion;</span>
+	}
+
+	@Override
+	public Shield findShieldById(int id) {
+<span class="fc" id="L74">		Shield shield = getHibernateTemplate().get(Shield.class, id);</span>
+<span class="fc" id="L75">		getHibernateTemplate().initialize(shield);</span>
+<span class="fc" id="L76">		return shield;</span>
+	}
+
+	@SuppressWarnings(&quot;unchecked&quot;)
+	@Override
+	public List&lt;Armor&gt; listAllArmor(int totalResults, Integer maxPrice) {
+
+<span class="fc" id="L83">		DetachedCriteria criteria = DetachedCriteria.forClass(Armor.class);</span>
+
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">		if (maxPrice != null) {</span>
+<span class="nc" id="L86">			criteria.add(Restrictions.le(&quot;value&quot;, maxPrice));</span>
+		}
+
+<span class="fc" id="L89">		List&lt;Armor&gt; list = (List&lt;Armor&gt;) getHibernateTemplate().findByCriteria(criteria, 0, totalResults);</span>
+<span class="fc" id="L90">		return list;</span>
+	}
+
+	@SuppressWarnings(&quot;unchecked&quot;)
+	@Override
+	public List&lt;Weapon&gt; listAllWeapon(int totalResults, Integer maxPrice) {
+
+<span class="fc" id="L97">		DetachedCriteria criteria = DetachedCriteria.forClass(Weapon.class);</span>
+
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">		if (maxPrice != null) {</span>
+<span class="nc" id="L100">			criteria.add(Restrictions.le(&quot;value&quot;, maxPrice));</span>
+		}
+
+<span class="fc" id="L103">		List&lt;Weapon&gt; list = (List&lt;Weapon&gt;) getHibernateTemplate().findByCriteria(criteria, 0, totalResults);</span>
+<span class="fc" id="L104">		return list;</span>
+	}
+
+	@SuppressWarnings(&quot;unchecked&quot;)
+	@Override
+	public List&lt;Shield&gt; listAllShield(int totalResults, Integer maxPrice) {
+
+<span class="fc" id="L111">		DetachedCriteria criteria = DetachedCriteria.forClass(Shield.class);</span>
+
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">		if (maxPrice != null) {</span>
+<span class="nc" id="L114">			criteria.add(Restrictions.le(&quot;value&quot;, maxPrice));</span>
+		}
+
+<span class="fc" id="L117">		List&lt;Shield&gt; list = (List&lt;Shield&gt;) getHibernateTemplate().findByCriteria(criteria, 0, totalResults);</span>
+<span class="fc" id="L118">		return list;</span>
+	}
+
+	@SuppressWarnings(&quot;unchecked&quot;)
+	@Override
+	public List&lt;Potion&gt; listAllPotion(int totalResults, Integer maxPrice) {
+
+<span class="nc" id="L125">		DetachedCriteria criteria = DetachedCriteria.forClass(Potion.class);</span>
+
+<span class="nc bnc" id="L127" title="All 2 branches missed.">		if (maxPrice != null) {</span>
+<span class="nc" id="L128">			criteria.add(Restrictions.le(&quot;value&quot;, maxPrice));</span>
+		}
+
+<span class="nc" id="L131">		List&lt;Potion&gt; list = (List&lt;Potion&gt;) getHibernateTemplate().findByCriteria(criteria, 0, totalResults);</span>
+<span class="nc" id="L132">		return list;</span>
+	}
+
+	@Override
+	public void saveOrUpdateWeapon(Weapon weapon) {
+<span class="fc" id="L137">		getHibernateTemplate().saveOrUpdate(weapon);</span>
+<span class="fc" id="L138">	}</span>
+
+	@Override
+	public void saveOrUpdateArmor(Armor armor) {
+<span class="fc" id="L142">		getHibernateTemplate().saveOrUpdate(armor);</span>
+<span class="fc" id="L143">	}</span>
+
+	@Override
+	public void saveOrUpdatePotion(Potion potion) {
+<span class="nc" id="L147">		getHibernateTemplate().saveOrUpdate(potion);</span>
+<span class="nc" id="L148">	}</span>
+
+	@Override
+	public void saveOrUpdateShield(Shield shield) {
+<span class="fc" id="L152">		getHibernateTemplate().saveOrUpdate(shield);</span>
+<span class="fc" id="L153">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="hu.inf.unideb.dungeonraider.domain">
+	<class name="Monster">
+		<id name="id"><generator class="native" /></id>
+		<property name="name" length="240" />
+		<property name="attackPoints" length="20" />
+		<property name="defendPoints" length="20" />
+		<property name="healthPoint" length="20" />
+		<property name="gold" length="20" />
+		<property name="damagePoints" length="20"></property>
+		<property name="exp" length="20" />
+		
+		
+		<many-to-one name="actualWeapon" class="Weapon" foreign-key="fk_monsterActualWeapon" />
+		<many-to-one name="actualShield" class="Shield" foreign-key="fk_monsterActualShield" />
+		<many-to-one name="actualArmor" class="Armor" foreign-key="fk_monsterActualArmor" />
+		<many-to-one name="position" class="MapElement" foreign-key="fk_monsterMapElement" />
+	
+		<property name="race" length="40">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">hu.inf.unideb.dungeonraider.domain.Race</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		
+	</class>
+</hibernate-mapping>

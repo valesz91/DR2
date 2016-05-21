@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<mapping resource="hu/inf/unideb/dungeon-raider/domain/Armor.hbm.xml" />
+		<mapping resource="hu/inf/unideb/dungeon-raider/domain/Shield.hbm.xml" />
+		<mapping resource="hu/inf/unideb/dungeon-raider/domain/Weapon.hbm.xml" />
+		<mapping resource="hu/inf/unideb/dungeon-raider/domain/Potion.hbm.xml" />
+		<mapping resource="hu/inf/unideb/dungeon-raider/domain/Item.hbm.xml" />
+		<mapping resource="hu/inf/unideb/dungeon-raider/domain/PlayersCharacter.hbm.xml" />
+		<mapping resource="hu/inf/unideb/dungeon-raider/domain/MapElement.hbm.xml" />
+		
+	</session-factory>
+</hibernate-configuration>	

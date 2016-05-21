@@ -1,0 +1,8 @@
+hu\inf\unideb\dungeonraider\web\AbstractController.class
+hu\inf\unideb\dungeonraider\web\ShopForm.class
+hu\inf\unideb\dungeonraider\web\CharacterController.class
+hu\inf\unideb\dungeonraider\web\CharacterForm.class
+hu\inf\unideb\dungeonraider\web\ShopController.class
+hu\inf\unideb\dungeonraider\web\DungeonRaiderMainController.class
+hu\inf\unideb\dungeonraider\web\DungeonRaiderBasicController.class
+hu\inf\unideb\dungeonraider\web\LoginForm.class

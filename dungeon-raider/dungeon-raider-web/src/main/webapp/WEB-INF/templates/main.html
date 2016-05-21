@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title data-th-text="#{application.title}">CvApp</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link data-th-href="@{/resources/images/favicon.png}" href="../../images/favicon.png" type="image/png" rel="shortcut icon" />
+<link data-th-href="@{/resources/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" rel="stylesheet"></link>
+<link data-th-href="@{/resources/css/bootstrap-theme.min.css}" href="../../css/bootstrap-theme.min.css" rel="stylesheet"></link>
+<link data-th-href="@{/resources/css/theme.css}" href="../../css/theme.css" rel="stylesheet"></link>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+	<nav data-th-replace="fragments/navbar :: navbar"></nav>
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h1 align="center" th:text="#{main.title}"></h1>
+
+
+<!-- 				<div class="form-group"> -->
+<!-- 					<label for="code" class="col-sm-2 control-label"><span data-th-text="#{trees.name}">Name</span></label> -->
+<!-- 					<div class="col-sm-3"> -->
+<!-- 						<input data-th-field="${name}" type="text" class="form-control" /> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 						<div class="form-group"> -->
+<!-- 					<label for="code" class="col-sm-2 control-label"><span data-th-text="#{trees.avg}">Avg</span></label> -->
+<!-- 					<div class="col-sm-3"> -->
+<!-- 						<input data-th-field="${avg}" type="text" class="form-control" /> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 						<div class="form-group"> -->
+<!-- 					<label for="code" class="col-sm-2 control-label"><span data-th-text="#{trees.depth}">Name</span></label> -->
+<!-- 					<div class="col-sm-3"> -->
+<!-- 						<input data-th-field="${depth}" type="text" class="form-control" /> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 						<div class="form-group"> -->
+<!-- 					<label for="code" class="col-sm-2 control-label"><span data-th-text="#{trees.disp}">Name</span></label> -->
+<!-- 					<div class="col-sm-3"> -->
+<!-- 						<input data-th-field="${disp}" type="text" class="form-control" /> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" data-th-src="@{/resources/js/jquery.min.js}" src="js/jquery.min.js"></script>
+	<script type="text/javascript" data-th-src="@{/resources/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
+</body>
+</html>

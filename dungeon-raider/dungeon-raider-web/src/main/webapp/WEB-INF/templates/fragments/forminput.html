@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+	<div class="form-group" th:fragment="input-horizontal (field, fieldSize, label, labelSize, required)"
+		th:classappend="${#fields.hasErrors(field)} ? 'has-error'">
+		<label th:class="${'__${labelSize}__'} +' control-label'"> <span th:text="${label}">Label</span> <sup th:if="${required}"
+			class="text-danger">*</sup>
+		</label>
+		<div th:class="${'__${fieldSize}__'}">
+			<input th:field="*{__${field}__}" type="text" class="form-control" /> <span data-th-if="${#fields.hasErrors(field)}" class="help-block"
+				data-th-errors="*{__${field}__}">Error message</span>
+		</div>
+	</div>
+
+	<div class="row" th:fragment="simple-row (field, fieldSize, label, labelSize)">
+		<label th:class="${'__${labelSize}__'} +' control-label'"> <span th:text="${label}">Label</span>
+		</label>
+		<div th:class="${'__${fieldSize}__'}">
+			<span th:text="*{__${field}__}"></span>
+		</div>
+	</div>
+	
+	<div class="row" th:fragment="simple-rowName (field, fieldSize, label, labelSize)">
+		<label th:class="${'__${labelSize}__'} +' control-label'"> <span th:text="${label}">Label</span>
+		</label>
+		<div th:if="*{__${field}__ ne null}" th:class="${'__${fieldSize}__'}">
+			<span th:text="*{__${field}__.name}"></span>
+		</div>
+	</div>
+	
+
+	<div class="form-group" th:fragment="input-numeric-horizontal (field, fieldSize, label, labelSize, required, id)"
+		th:classappend="${#fields.hasErrors(field)} ? 'has-error'">
+		<label th:class="${'__${labelSize}__'} +' control-label'"> <span th:text="${label}">Label</span> <sup th:if="${required}"
+			class="text-danger">*</sup>
+		</label>
+		<div th:class="${'__${fieldSize}__'}">
+			<input th:field="*{__${field}__}" type="number" min="0" max="10" class="form-control" th:id="${id}" /> <span
+				data-th-if="${#fields.hasErrors(field)}" class="help-block" data-th-errors="*{__${field}__}">Error message</span>
+		</div>
+	</div>
+	<div class="form-group" th:fragment="simple-input-horizontal (field, fieldSize)" th:classappend="${#fields.hasErrors(field)} ? 'has-error'">
+		<div th:class="${'__${fieldSize}__'}">
+			<input th:field="*{__${field}__}" type="text" class="form-control" /> <span data-th-if="${#fields.hasErrors(field)}" class="help-block"
+				data-th-errors="*{__${field}__}">Error message</span>
+		</div>
+	</div>
+
+	<!-- 	evaluations/edit -->
+	<div th:class="${'__${baseSize}__'} +' form-group'"
+		th:fragment="sizedinput-horizontal (baseSize, field, fieldSize, label, labelSize, required)"
+		th:classappend="${#fields.hasErrors(field)} ? 'has-error'">
+		<label th:class="${'__${labelSize}__'} +' control-label'"> <span th:text="${label}">Label</span> <sup th:if="${required}"
+			class="text-danger">*</sup>
+		</label>
+		<div th:class="${'__${fieldSize}__'}">
+			<input th:field="*{__${field}__}" type="text" class="form-control" /> <span data-th-if="${#fields.hasErrors(field)}" class="help-block"
+				data-th-errors="*{__${field}__}">Error message</span>
+		</div>
+	</div>
+
+	<div  	th:fragment="select_bol(field)">
+		<select th:field="*{__${field}__}" class="form-control input-sm" id="filter">
+			<option value="false" th:text="#{general.any}">Any</option>
+			<option value="true" th:text="#{shop.canBuy}"></option>
+		</select>
+	</div>
+</body>
+
+</html>

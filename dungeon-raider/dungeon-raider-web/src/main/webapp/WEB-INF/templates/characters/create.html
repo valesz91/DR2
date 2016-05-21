@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title data-th-text="#{application.title}">Dungeon Raider</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link data-th-href="@{/resources/images/favicon.png}" href="../../images/favicon.png" type="image/png" rel="shortcut icon" />
+<link data-th-href="@{/resources/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" rel="stylesheet"></link>
+<link data-th-href="@{/resources/css/bootstrap-theme.min.css}" href="../../css/bootstrap-theme.min.css" rel="stylesheet"></link>
+<link data-th-href="@{/resources/css/toastr.min.css}" href="../../css/toastr.min.css" rel="stylesheet"></link>
+<link data-th-href="@{/resources/css/theme.css}" href="../../css/theme.css" rel="stylesheet"></link>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h1 align="center" th:text="#{main.title}">r</h1>
+				<form data-th-object="${form}" action="#" data-th-action="@{/characters/create.html}" method="post">
+					<div class="col-xs-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<span data-th-text="#{characters.basicInformation}"></span>
+							</div>
+							<div class="panel-body">
+								<div
+									th:replace="fragments/forminput :: input-horizontal(field='name', fieldSize='col-xs-9', label=#{login.name}, labelSize='col-xs-3', required=true)"></div>
+
+								<label for="password" class="col-sm-3 control-label"><span data-th-text="#{login.password}">Password</span></label>
+								<div class="col-sm-9" th:classappend="${#fields.hasErrors('password')} ? 'has-error'">
+									<input data-th-field="*{password}" type="password" class="form-control" /> <span data-th-if="${#fields.hasErrors('password')}"
+										class="help-block" data-th-errors="${password}">Error message</span>
+
+								</div>
+<!-- 								<div -->
+<!-- 									th:replace="fragments/forminput :: input-horizontal(field='password', fieldSize='col-xs-9', label=#{login.password}, labelSize='col-xs-3', required=true)"></div> -->
+
+							</div>
+						</div>
+
+
+					</div>
+					<div class="col-xs-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<span data-th-text="#{characters.basicStats}"></span>
+							</div>
+							<div class="panel-body">
+								<div class="h3" th:text="#{characters.basicStatHint}"></div>
+								<br /> <br />
+								<div
+									th:replace="fragments/forminput :: input-numeric-horizontal(field='strength', fieldSize='col-xs-3', label=#{characters.strength}, labelSize='col-xs-6', required=true, id='strenght')"></div>
+								<div
+									th:replace="fragments/forminput :: input-numeric-horizontal(field='dexterity', fieldSize='col-xs-3', label=#{characters.dexterity}, labelSize='col-xs-6', required=true, id='dexterity')"></div>
+								<div
+									th:replace="fragments/forminput :: input-numeric-horizontal(field='health', fieldSize='col-xs-3', label=#{characters.health}, labelSize='col-xs-6', required=true, id='health')"></div>
+								<div
+									th:replace="fragments/forminput :: input-numeric-horizontal(field='quickness', fieldSize='col-xs-3', label=#{characters.quickness}, labelSize='col-xs-6', required=true, id='quickness')"></div>
+					
+							</div>
+						</div>
+
+
+					</div>
+
+<div class="col-xs-6">
+<button type="submit" class="btn btn-default" data-th-text="#{characters.create}">Login</button>
+</div>
+
+					<!-- 					<div class="form-group"> -->
+					<!-- 						<label for="code" class="col-sm-2 control-label"><span data-th-text="#{login.name}">Name</span></label> -->
+					<!-- 						<div class="col-sm-3"> -->
+					<!-- 							<input data-th-field="*{name}" type="text" class="form-control" /> -->
+					<!-- 						</div> -->
+					<!-- 					</div> -->
+					<!-- 					<div class="form-group"> -->
+					<!-- 						<label for="code" class="col-sm-2 control-label"><span data-th-text="#{login.password}">Password</span></label> -->
+					<!-- 						<div class="col-sm-3"> -->
+					<!-- 							<input data-th-field="*{password}" type="text" class="form-control" /> -->
+					<!-- 						</div> -->
+					<!-- 						<button type="submit" class="btn btn-default" data-th-text="#{login.login}">Login</button> -->
+
+					<!-- 						<button type="submit" name="newCharacter" class="btn btn-default" data-th-text="#{login.newCharacter}">Start new character</button> -->
+					<!-- 					</div> -->
+				</form>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" data-th-src="@{/resources/js/jquery.min.js}" src="js/jquery.min.js"></script>
+	<script type="text/javascript" data-th-src="@{/resources/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" data-th-src="@{/resources/js/jquery.min.js}" src="js/jquery.min.js"></script>
+	<script type="text/javascript" data-th-src="@{/resources/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" data-th-src="@{/resources/js/toastr.min.js}" src="js/toastr.min.js"></script>
+	<script type="text/javascript" data-th-src="@{/resources/js/popovers.js}" src="../../js/popovers.js"></script>
+	
+	<script data-th-if="${errorMsg}" data-th-inline="javascript" type="text/javascript">
+		toastr.error([[#{${errorMsg}}]], [[#{general.notifierError}]]);
+	</script>
+	<script data-th-if="${successMsg}" data-th-inline="javascript" type="text/javascript">
+	/*<![CDATA[*/
+		toastr.success([[#{${successMsg}}]], [[#{general.notifierSuccess}]]);
+	/*]]>*/
+	</script>
+
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+		var str =$("#strength").val();
+		var dex =$("#dexterity").val();
+		var heal =$("#health").val();
+		
+    $("input").attr({
+       "max" : 10      // substitute your own
+       "min" : 0          // values (or variables) here
+    });
+});
+	
+	</script>
+</body>
+</html>

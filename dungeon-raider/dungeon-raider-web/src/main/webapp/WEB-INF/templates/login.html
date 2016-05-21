@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title data-th-text="#{application.title}">Dungeon Raider</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link data-th-href="@{/resources/images/favicon.png}" href="../../images/favicon.png" type="image/png" rel="shortcut icon" />
+<link data-th-href="@{/resources/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" rel="stylesheet"></link>
+<link data-th-href="@{/resources/css/bootstrap-theme.min.css}" href="../../css/bootstrap-theme.min.css" rel="stylesheet"></link>
+<link data-th-href="@{/resources/css/toastr.min.css}" href="../../css/toastr.min.css" rel="stylesheet"></link>
+<link data-th-href="@{/resources/css/theme.css}" href="../../css/theme.css" rel="stylesheet"></link>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h1 align="center" th:text="#{main.title}">r</h1>
+				<form data-th-object="${form}" action="#" data-th-action="@{/login.html}" method="post">
+
+
+					<div class="form-group">
+						<label for="code" class="col-sm-2 control-label"><span data-th-text="#{login.name}">Name</span></label>
+						<div class="col-sm-3"  th:classappend="${#fields.hasErrors('name')} ? 'has-error'">
+							<input data-th-field="*{name}" type="text" class="form-control" />
+							<span data-th-if="${#fields.hasErrors('name')}" class="help-block" data-th-errors="${name}">Error message</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="password" class="col-sm-2 control-label"><span data-th-text="#{login.password}">Password</span></label>
+						<div class="col-sm-3"   th:classappend="${#fields.hasErrors('password')} ? 'has-error'">
+							<input data-th-field="*{password}" type="password" class="form-control" />
+							<span data-th-if="${#fields.hasErrors('password')}" class="help-block" data-th-errors="${password}">Error message</span>
+							
+						</div>
+						<button type="submit" class="btn btn-default" data-th-text="#{login.login}">Login</button>
+						
+						<a class="btn btn-default" href="#" th:href="@{/characters/create.html}">
+							 <span th:text="#{login.newCharacter}"></span>
+						</a>
+<!-- 						<button type="submit" name="newCharacter" class="btn btn-default" data-th-text="#{login.newCharacter}">Start new character</button> -->
+					</div>
+				</form>
+			</div>
+	</div>
+	</div>
+	<script type="text/javascript" data-th-src="@{/resources/js/jquery.min.js}" src="js/jquery.min.js"></script>
+	<script type="text/javascript" data-th-src="@{/resources/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" data-th-src="@{/resources/js/toastr.min.js}" src="js/toastr.min.js"></script>
+	<script type="text/javascript" data-th-src="@{/resources/js/popovers.js}" src="../../js/popovers.js"></script>
+	
+	<script data-th-if="${errorMsg}" data-th-inline="javascript" type="text/javascript">
+		toastr.error([[#{${errorMsg}}]], [[#{general.notifierError}]]);
+	</script>
+	<script data-th-if="${successMsg}" data-th-inline="javascript" type="text/javascript">
+	/*<![CDATA[*/
+		toastr.success([[#{${successMsg}}]], [[#{general.notifierSuccess}]]);
+	/*]]>*/
+	</script>
+
+</body>
+</html>

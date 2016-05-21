@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ItemServiceImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Dungeon Raider Common Module</a> &gt; <a href="index.source.html" class="el_package">hu.inf.unideb.dungeonraider.service.impl</a> &gt; <span class="el_source">ItemServiceImpl.java</span></div><h1>ItemServiceImpl.java</h1><pre class="source lang-java linenums">package hu.inf.unideb.dungeonraider.service.impl;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
+import hu.inf.unideb.dungeonraider.dao.ItemDao;
+import hu.inf.unideb.dungeonraider.dao.PlayersCharacterDao;
+import hu.inf.unideb.dungeonraider.domain.Armor;
+import hu.inf.unideb.dungeonraider.domain.Item;
+import hu.inf.unideb.dungeonraider.domain.ItemType;
+import hu.inf.unideb.dungeonraider.domain.PlayersCharacter;
+import hu.inf.unideb.dungeonraider.domain.Potion;
+import hu.inf.unideb.dungeonraider.domain.Shield;
+import hu.inf.unideb.dungeonraider.domain.Weapon;
+import hu.inf.unideb.dungeonraider.service.ItemException;
+import hu.inf.unideb.dungeonraider.service.ItemService;
+import hu.inf.unideb.dungeonraider.service.MissingEntityException;
+
+@Service(&quot;itemService&quot;)
+<span class="fc" id="L25">public class ItemServiceImpl implements ItemService {</span>
+
+	@Autowired
+	private ItemDao itemDao;
+
+	@Autowired
+	private PlayersCharacterDao characterDao;
+
+	@Override
+	@Transactional(readOnly = true)
+	public List&lt;Armor&gt; listArmors(int characterId, boolean canBuy) {
+
+<span class="nc" id="L37">		Assert.notNull(characterId);</span>
+<span class="nc" id="L38">		Assert.notNull(canBuy);</span>
+
+<span class="nc" id="L40">		int totalResults = itemDao.countArmors();</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">		if (totalResults == 0) {</span>
+<span class="nc" id="L42">			return new LinkedList&lt;Armor&gt;();</span>
+		}
+
+<span class="nc" id="L45">		System.out.println(totalResults);</span>
+
+<span class="nc" id="L47">		Integer maxPrice = null;</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">		if (canBuy) {</span>
+<span class="nc" id="L49">			PlayersCharacter pc = characterDao.findById(characterId);</span>
+<span class="nc" id="L50">			System.out.println(pc.getName());</span>
+<span class="nc" id="L51">			maxPrice = pc.getGold();</span>
+<span class="nc" id="L52">			System.out.println(maxPrice);</span>
+
+<span class="nc" id="L54">		} else {</span>
+<span class="nc" id="L55">			maxPrice = null;</span>
+		}
+
+<span class="nc" id="L58">		List&lt;Armor&gt; list = itemDao.listAllArmor(totalResults, maxPrice);</span>
+<span class="nc" id="L59">		return list;</span>
+
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List&lt;Weapon&gt; listWeapons(int characterId, boolean canBuy) {
+
+<span class="nc" id="L67">		Assert.notNull(characterId);</span>
+<span class="nc" id="L68">		Assert.notNull(canBuy);</span>
+
+<span class="nc" id="L70">		int totalResults = itemDao.countWeapons();</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">		if (totalResults == 0) {</span>
+<span class="nc" id="L72">			return new LinkedList&lt;Weapon&gt;();</span>
+		}
+
+		Integer maxPrice;
+<span class="nc bnc" id="L76" title="All 2 branches missed.">		if (canBuy) {</span>
+<span class="nc" id="L77">			maxPrice = characterDao.findById(characterId).getGold();</span>
+
+<span class="nc" id="L79">		} else {</span>
+<span class="nc" id="L80">			maxPrice = null;</span>
+		}
+
+<span class="nc" id="L83">		List&lt;Weapon&gt; list = itemDao.listAllWeapon(totalResults, maxPrice);</span>
+<span class="nc" id="L84">		return list;</span>
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List&lt;Shield&gt; listShields(int characterId, boolean canBuy) {
+
+<span class="nc" id="L91">		Assert.notNull(characterId);</span>
+<span class="nc" id="L92">		Assert.notNull(canBuy);</span>
+
+<span class="nc" id="L94">		int totalResults = itemDao.countShields();</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">		if (totalResults == 0) {</span>
+<span class="nc" id="L96">			return new LinkedList&lt;Shield&gt;();</span>
+		}
+
+		Integer maxPrice;
+<span class="nc bnc" id="L100" title="All 2 branches missed.">		if (canBuy) {</span>
+<span class="nc" id="L101">			maxPrice = characterDao.findById(characterId).getGold();</span>
+
+<span class="nc" id="L103">		} else {</span>
+<span class="nc" id="L104">			maxPrice = null;</span>
+		}
+
+<span class="nc" id="L107">		List&lt;Shield&gt; list = itemDao.listAllShield(totalResults, maxPrice);</span>
+<span class="nc" id="L108">		return list;</span>
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List&lt;Potion&gt; listPotions(int characterId, boolean canBuy) {
+
+<span class="nc" id="L115">		Assert.notNull(characterId);</span>
+<span class="nc" id="L116">		Assert.notNull(canBuy);</span>
+
+<span class="nc" id="L118">		int totalResults = itemDao.countPotions();</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">		if (totalResults == 0) {</span>
+<span class="nc" id="L120">			return new LinkedList&lt;Potion&gt;();</span>
+		}
+
+		Integer maxPrice;
+<span class="nc bnc" id="L124" title="All 2 branches missed.">		if (canBuy) {</span>
+<span class="nc" id="L125">			maxPrice = characterDao.findById(characterId).getGold();</span>
+
+<span class="nc" id="L127">		} else {</span>
+<span class="nc" id="L128">			maxPrice = null;</span>
+		}
+
+<span class="nc" id="L131">		List&lt;Potion&gt; list = itemDao.listAllPotion(totalResults, maxPrice);</span>
+<span class="nc" id="L132">		return list;</span>
+	}
+
+	@Override
+	@Transactional
+	public void buy(ItemType type, Integer itemId, Integer characterId) {
+
+<span class="nc" id="L139">		Assert.notNull(characterId);</span>
+<span class="nc" id="L140">		Assert.notNull(itemId);</span>
+<span class="nc" id="L141">		Assert.notNull(type);</span>
+<span class="nc" id="L142">		PlayersCharacter pc = characterDao.findById(characterId);</span>
+
+<span class="nc bnc" id="L144" title="All 2 branches missed.">		if (pc == null) {</span>
+<span class="nc" id="L145">			throw new MissingEntityException(characterId);</span>
+		}
+
+<span class="nc bnc" id="L148" title="All 5 branches missed.">		switch (type) {</span>
+		case SHIELD:
+<span class="nc" id="L150">			Shield toBuyS = itemDao.findShieldById(itemId);</span>
+<span class="nc" id="L151">			checkWeight(toBuyS, pc);</span>
+<span class="nc" id="L152">			checkGoldAndBuy(toBuyS.getValue(), pc);</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">			if (pc.getShields() == null) {</span>
+<span class="nc" id="L154">				pc.setShields(new LinkedList&lt;Shield&gt;());</span>
+			}
+<span class="nc" id="L156">			pc.getShields().add(toBuyS);</span>
+			// toBuyS.setPlayersCharacter(pc);
+			// itemDao.saveOrUpdateShield(toBuyS);
+<span class="nc" id="L159">			break;</span>
+		case ARMOR:
+<span class="nc" id="L161">			Armor toBuyA = itemDao.findArmorById(itemId);</span>
+<span class="nc" id="L162">			checkWeight(toBuyA, pc);</span>
+<span class="nc" id="L163">			checkGoldAndBuy(toBuyA.getValue(), pc);</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">			if (pc.getArmors() == null) {</span>
+<span class="nc" id="L165">				pc.setArmors(new LinkedList&lt;Armor&gt;());</span>
+			}
+<span class="nc" id="L167">			pc.getArmors().add(toBuyA);</span>
+<span class="nc" id="L168">			break;</span>
+		case POTION:
+<span class="nc" id="L170">			Potion toBuyP = itemDao.findPotionById(itemId);</span>
+<span class="nc" id="L171">			checkWeight(toBuyP, pc);</span>
+<span class="nc" id="L172">			checkGoldAndBuy(toBuyP.getValue(), pc);</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">			if (pc.getArmors() == null) {</span>
+<span class="nc" id="L174">				pc.setArmors(new LinkedList&lt;Armor&gt;());</span>
+			}
+<span class="nc" id="L176">			pc.getPotions().add(toBuyP);</span>
+<span class="nc" id="L177">			break;</span>
+		case WEAPON:
+<span class="nc" id="L179">			Weapon toBuyW = itemDao.findWeaponById(itemId);</span>
+<span class="nc" id="L180">			checkWeight(toBuyW, pc);</span>
+<span class="nc" id="L181">			checkGoldAndBuy(toBuyW.getValue(), pc);</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">			if (pc.getWeapons() == null) {</span>
+<span class="nc" id="L183">				pc.setWeapons(new LinkedList&lt;Weapon&gt;());</span>
+			}
+<span class="nc" id="L185">			pc.getWeapons().add(toBuyW);</span>
+			break;
+		}
+
+<span class="nc" id="L189">		characterDao.saveOrUpdatePlayersCharacter(pc);</span>
+<span class="nc" id="L190">	}</span>
+
+	@Transactional
+	private boolean checkGoldAndBuy(Integer value, PlayersCharacter pc) {
+
+<span class="nc" id="L195">		int ch = 0;</span>
+<span class="nc" id="L196">		ch = pc.getGold() - value;</span>
+<span class="nc bnc" id="L197" title="All 2 branches missed.">		if (ch &gt;= 0) {</span>
+<span class="nc" id="L198">			pc.setGold(ch);</span>
+<span class="nc" id="L199">			characterDao.saveOrUpdatePlayersCharacter(pc);</span>
+<span class="nc" id="L200">		} else {</span>
+<span class="nc" id="L201">			throw new ItemException(&quot;error.youHaveNotEnoughGold&quot;);</span>
+		}
+<span class="nc" id="L203">		return true;</span>
+
+	}
+
+	private void checkWeight(Item item, PlayersCharacter pc) {
+<span class="nc bnc" id="L208" title="All 2 branches missed.">		if (pc.getLoadCapacity() &lt; item.getWeight()) {</span>
+<span class="nc" id="L209">			throw new ItemException(&quot;error.tooHeawyItem&quot;);</span>
+		}
+
+<span class="nc" id="L212">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

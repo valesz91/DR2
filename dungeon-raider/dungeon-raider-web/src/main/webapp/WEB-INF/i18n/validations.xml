@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Validation messages -->
+	<entry key="validation.required">Required field!</entry>
+	<entry key="login.wrongPasswordOrLoginName">Wrong password or login name!</entry>
+
+	<entry key="general.notifierError">Error</entry>
+	<entry key="general.notifierSuccess">Success</entry>
+	<entry key="create.conflictingValue">This value is used! Please choose an another one!</entry>
+	<entry key="create.wrongValueDivision">Wrong value division! The sum of the stats must be
+		less then equals with 10! </entry>
+
+	<entry key="success.characterCreate">Character successfully created!</entry>
+	<entry key="success.itemBuyed">Item buyed!</entry>
+	<entry key="success.itemEquipped">Item Equipped!</entry>
+	<entry key="error.youHaveNotEnoughGold">You have not enough gold to buy this item!</entry>
+	<entry key="error.tooHeawyItem">You carry too much items!</entry>
+</properties>

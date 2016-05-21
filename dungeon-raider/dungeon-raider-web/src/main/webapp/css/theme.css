@@ -1,0 +1,47 @@
+textarea {
+    resize: none;
+}
+
+body {
+	background-color: #adbade;
+	background-image: linear-gradient(to bottom, #a4b2da 0, #adbade 100%);
+	background-repeat: repeat-x;
+	padding-top: 60px;
+}
+
+body, html {
+	height: 100%;
+}
+
+.vm-callout {
+  border-right: 5px solid #eee;
+  border-color: #777777;
+}
+
+.vrm-pub {
+	padding-top: 0px;
+}
+
+.vm-hidden{
+	display: none !important;
+}
+
+.table-hover > tbody > tr {
+	transition: background-color 500ms;
+}
+
+.vm-wrapper {
+	background-color: #f8f8f8;
+	background-image: linear-gradient(to bottom, #fff 0, #f8f8f8 100%);
+	background-repeat: repeat-x;
+	border: 1px solid #e7e7e7;
+	border-radius: 4px;
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0.15),0 1px 5px rgba(0,0,0,0.075);
+}
+
+.vm-panel {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
