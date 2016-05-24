@@ -230,16 +230,40 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.10.3</version>
+				<reportSets>
+					<reportSet>
+					<id>default-report</id>
+						<reports>
+							<report>default</report>
+						</reports>
+					</reportSet>
+				</reportSets>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
 				<version>2.19.1</version>
+				<reportSets>
+					<reportSet>
+					<id>surefire-report</id>
+						<reports>
+							<report>surefire-report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
 				<version>2.5</version>
+				<reportSets>
+					<reportSet>
+					<id>jxr-report</id>
+						<reports>
+							<report>jxr</report>
+						</reports>
+					</reportSet>
+				</reportSets>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -247,6 +271,7 @@
 				<version>2.7</version>
 				<reportSets>
 					<reportSet>
+					<id>cobertura-report</id>
 						<reports>
 							<report>cobertura</report>
 						</reports>
@@ -265,6 +290,14 @@
 				<configuration>
 					<configLocation>${basedir}/src/main/resources/checkstyle.xml</configLocation>
 				</configuration>
+				<reportSets>
+					<reportSet>
+					<id>chekstyle-report</id>
+						<reports>
+							<report>checkstyle</report>
+						</reports>
+					</reportSet>
+				</reportSets>
 			</plugin>
 
 		</plugins>
