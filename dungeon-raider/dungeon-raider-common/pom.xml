@@ -234,7 +234,7 @@
 					<reportSet>
 					<id>default-report</id>
 						<reports>
-							<report>default</report>
+							<report>javadoc</report>
 						</reports>
 					</reportSet>
 				</reportSets>
@@ -247,7 +247,7 @@
 					<reportSet>
 					<id>surefire-report</id>
 						<reports>
-							<report>surefire-report</report>
+							<report>report</report>
 						</reports>
 					</reportSet>
 				</reportSets>
