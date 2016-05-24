@@ -204,7 +204,6 @@ public class CharacterController extends AbstractController {
 	 * @param model the model
 	 * @param id the item id
 	 * @param type the item type
-	 * @param prototype the players character prototype
 	 * @param redirectAttrs the redirect attributes
 	 * @param characterId the characterId
 	 * @return the view name
