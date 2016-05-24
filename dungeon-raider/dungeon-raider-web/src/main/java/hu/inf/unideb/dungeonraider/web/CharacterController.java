@@ -164,10 +164,11 @@ public class CharacterController extends AbstractController {
 	 * Handling item equipping submission.
 	 * 
 	 * @param model the model
-	 * @param id the chracter id
+	 * @param id the item id
 	 * @param type the item type
-	 * @param prototype the players character prototype
+	 * @param form the editForm
 	 * @param redirectAttrs the redirect attributes
+	 * @param characterId the ID of the character
 	 * @return the view name
 	 */
 	@RequestMapping(value = "/equip", method = RequestMethod.GET, produces = "text/html")
@@ -201,10 +202,11 @@ public class CharacterController extends AbstractController {
 	 * Handling dropping mehtod submission.
 	 * 
 	 * @param model the model
-	 * @param id the chracter id
+	 * @param id the item id
 	 * @param type the item type
 	 * @param prototype the players character prototype
 	 * @param redirectAttrs the redirect attributes
+	 * @param characterId the characterId
 	 * @return the view name
 	 */
 	@RequestMapping(value = "/drop", method = RequestMethod.GET, produces = "text/html")
