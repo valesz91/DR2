@@ -19,6 +19,8 @@
 			<div class="panel-body">
 				<h1 align="center" th:text="#{main.title}">r</h1>
 				<form data-th-object="${form}" action="#" data-th-action="@{/characters/edit.html}" method="post">
+				<input data-th-field="*{id}" type="hidden" />
+				
 					<div class="row">
 						<div class="col-xs-6">
 							<div class="panel panel-default">
@@ -114,8 +116,17 @@
 									<br /> <br />
 									<div
 										th:replace="fragments/forminput :: simple-row(field='gold', fieldSize='col-xs-3', label=#{item.gold}, labelSize='col-xs-6', required=true)"></div>
-									<div
-										th:replace="fragments/forminput :: simple-row(field='loadCapacity', fieldSize='col-xs-3', label=#{characters.maxLoadCapacity}, labelSize='col-xs-6', required=true)"></div>
+									<div>
+										<label class="col-xs-6 control-label"> <span th:text="#{characters.maxLoadCapacity}">Label</span>
+										</label>
+										<div th:class="col-xs-3">
+<!-- 											<span th:text="${#numbers.formatDecimal(loadCapacity,1,1)} }"></span> -->
+												<span th:text="${loadCapacity}"></span>
+										
+										</div>
+									</div>
+									<!-- 									<div -->
+<!-- 										th:replace="fragments/forminput :: simple-row(field='loadCapacity', fieldSize='col-xs-3', label=#{characters.maxLoadCapacity}, labelSize='col-xs-6', required=true)"></div> -->
 <!-- 									<div -->
 <!-- 										th:replace="fragments/forminput :: simple-row(field='${itemsWeights}', fieldSize='col-xs-3', label=#{inventory.itemWeights}, labelSize='col-xs-6', required=true)"></div> -->
 
@@ -148,7 +159,7 @@
 												<!-- 								TODO		make it labelled! -->
 												<td data-th-text="${item.type}">type</td>
 												<td><div class="btn-group" role="group">
-														<a th:href="@{/characters/equip.html(id=${item.id}, type=${item.type})}" href="#" class="btn btn-xs btn-info"><span th:text="#{item.equip}"></span></a>
+														<a th:href="@{/characters/equip.html(id=${item.id}, type=${item.type}, characterId=${characterId})}" href="#" class="btn btn-xs btn-info"><span th:text="#{item.equip}"></span></a>
 														<a th:href="@{/characters/drop.html(id=${item.id}, type=${item.type})}" class="btn btn-xs btn-default" href="#"><span th:text="#{item.drop}"></span></a>
 <!-- 														<a class="btn btn-default btn-xs" data-toggle="modal" data-target="#viewModal" data-entity="${item}" data-th-text="#{shop.view}" role="button"><span th:text="#{item.view}"></span></a> -->
 													</div></td>
@@ -159,8 +170,8 @@
 												<td data-th-text="${item.weight}">Value</td>
 												<!-- 								TODO		make it labelled! -->
 												<td data-th-text="${item.type}">type</td>
-												<td><a th:href="@{/characters/equip.html(id=${item.id}, type=${item.type})}" href="#" class="btn btn-xs btn-info"><span
-														th:text="#{item.equip}"></span></a> <a th:href="@{/characters/drop.html(id=${item.id}, type=${item.type})}"
+												<td><a th:href="@{/characters/equip.html(id=${item.id}, type=${item.type}, characterId=${characterId})}" href="#" class="btn btn-xs btn-info"><span
+														th:text="#{item.equip}"></span></a> <a th:href="@{/characters/drop.html(id=${item.id}, type=${item.type}, characterId=${characterId})}"
 													class="btn btn-xs btn-default" href="#"><span th:text="#{item.drop}"></span></a> <!-- 														<a class="btn btn-default btn-xs" data-toggle="modal" data-target="#viewModal" data-entity="${item}" data-th-text="#{shop.view}" role="button"><span th:text="#{item.view}"></span></a> -->
 
 												</td>
@@ -171,8 +182,20 @@
 												<td data-th-text="${item.weight}">Value</td>
 												<!-- 								TODO		make it labelled! -->
 												<td data-th-text="${item.type}">type</td>
-																			<td><a th:href="@{/characters/equip.html(id=${item.id}, type=${item.type})}" href="#" class="btn btn-xs btn-info"><span
-														th:text="#{item.equip}"></span></a> <a th:href="@{/characters/drop.html(id=${item.id}, type=${item.type})}"
+																			<td><a th:href="@{/characters/equip.html(id=${item.id}, type=${item.type}, characterId=${characterId})}" href="#" class="btn btn-xs btn-info"><span
+														th:text="#{item.equip}"></span></a> <a th:href="@{/characters/drop.html(id=${item.id}, type=${item.type}, characterId=${characterId})}"
+													class="btn btn-xs btn-default" href="#"><span th:text="#{item.drop}"></span></a> <!-- 														<a class="btn btn-default btn-xs" data-toggle="modal" data-target="#viewModal" data-entity="${item}" data-th-text="#{shop.view}" role="button"><span th:text="#{item.view}"></span></a> -->
+
+												</td>
+											</tr>
+											<tr data-th-each="item: *{shields}">
+												<td data-th-text="${item.name}">Name</td>
+												<td data-th-text="${item.value}">Value</td>
+												<td data-th-text="${item.weight}">Value</td>
+												<!-- 								TODO		make it labelled! -->
+												<td data-th-text="${item.type}">type</td>
+												<td><a th:href="@{/characters/equip.html(id=${item.id}, type=${item.type}, characterId=${characterId})}" href="#" class="btn btn-xs btn-info"><span
+														th:text="#{item.equip}"></span></a> <a th:href="@{/characters/drop.html(id=${item.id}, type=${item.type}, characterId=${characterId})}"
 													class="btn btn-xs btn-default" href="#"><span th:text="#{item.drop}"></span></a> <!-- 														<a class="btn btn-default btn-xs" data-toggle="modal" data-target="#viewModal" data-entity="${item}" data-th-text="#{shop.view}" role="button"><span th:text="#{item.view}"></span></a> -->
 
 												</td>
@@ -184,7 +207,7 @@
 												<!-- 								TODO		make it labelled! -->
 												<td data-th-text="${item.type}">type</td>
 																			<td><a th:href="@{/characters/equip.html(id=${item.id}, type=${item.type})}" href="#" class="btn btn-xs btn-info"><span
-														th:text="#{item.equip}"></span></a> <a th:href="@{/characters/drop.html(id=${item.id}, type=${item.type})}"
+														th:text="#{item.equip}"></span></a> <a th:href="@{/characters/drop.html(id=${item.id}, type=${item.type}, characterId=${characterId})}"
 													class="btn btn-xs btn-default" href="#"><span th:text="#{item.drop}"></span></a> <!-- 														<a class="btn btn-default btn-xs" data-toggle="modal" data-target="#viewModal" data-entity="${item}" data-th-text="#{shop.view}" role="button"><span th:text="#{item.view}"></span></a> -->
 
 												</td>

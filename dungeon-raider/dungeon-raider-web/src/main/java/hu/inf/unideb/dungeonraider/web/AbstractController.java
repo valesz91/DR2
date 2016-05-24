@@ -3,6 +3,12 @@ package hu.inf.unideb.dungeonraider.web;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * Abstact controller for the frequently used only controller methods.
+ * 
+ * @author FV
+ *
+ */
 public class AbstractController {
 
 	/**

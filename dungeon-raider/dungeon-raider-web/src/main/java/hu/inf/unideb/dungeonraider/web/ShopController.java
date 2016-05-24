@@ -11,15 +11,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import hu.inf.unideb.dungeonraider.domain.Armor;
+import hu.inf.unideb.dungeonraider.domain.Item;
 import hu.inf.unideb.dungeonraider.domain.ItemType;
 import hu.inf.unideb.dungeonraider.domain.PlayersCharacter;
+import hu.inf.unideb.dungeonraider.domain.Shield;
+import hu.inf.unideb.dungeonraider.domain.Weapon;
 import hu.inf.unideb.dungeonraider.service.ItemException;
 import hu.inf.unideb.dungeonraider.service.ItemService;
 import hu.inf.unideb.dungeonraider.service.MissingEntityException;
 import hu.inf.unideb.dungeonraider.service.PlayerService;
 
 /**
- * Shop views controller
+ * Shop views controller class.
  * 
  * @author FV
  *
@@ -29,12 +33,14 @@ import hu.inf.unideb.dungeonraider.service.PlayerService;
 @SessionAttributes(types = ShopForm.class)
 public class ShopController extends AbstractController {
 
+	/** The <code>autowired</code> item service <code>spring enterprise bean</code>. */
 	@Autowired
 	private ItemService itemService;
+	/** The <code>autowired</code> player service <code>spring enterprise bean</code>. */
 	@Autowired
 	private PlayerService playerService;
 
-	/** SLF4J Logger */
+	/** SLF4J Logger. */
 	private final Logger log = LoggerFactory.getLogger(ShopController.class);
 
 	/**
@@ -59,6 +65,8 @@ public class ShopController extends AbstractController {
 		form.setWeapons(itemService.listWeapons(id, form.getWeaponCanBuy()));
 		form.setShields(itemService.listShields(id, form.getShieldCanBuy()));
 		form.setPotions(itemService.listPotions(id, form.getPotionCanBuy()));
+		form.setGold(pc.getGold());
+		form.setLoadCapacity(pc.getLoadCapacity());
 
 		//
 		// form.setArmors(itemService.listArmors(id, false));
@@ -81,6 +89,7 @@ public class ShopController extends AbstractController {
 	 * @param id the chracter id
 	 * @param type the item type
 	 * @param form the shop form
+	 * @param redirectAttrs the redirect attributes
 	 * @return the view name
 	 */
 	@RequestMapping(value = "/buy", method = RequestMethod.GET, produces = "text/html")
@@ -161,6 +170,82 @@ public class ShopController extends AbstractController {
 		return "redirect:/shop/items?id=" + pc.getId();
 
 		// return "shop/items";
+
+	}
+
+	@RequestMapping(value = "/item", method = RequestMethod.GET, produces = "text/html")
+	public String viewItem(Model model, @RequestParam("id") int id, @RequestParam("type") ItemType type,
+			@RequestParam("characterId") Integer characterId, RedirectAttributes redirectAttrs) {
+		PlayersCharacter pc = playerService.findById(characterId);
+		if (pc == null) {
+			log.error("Internal problem occured while handled characters item buying submision. Character not found.");
+			addErrorMsg(redirectAttrs, "error.notFoundCharacter");
+			return "redirect:/500.html";
+		}
+
+		ItemForm form = new ItemForm();
+
+		switch (type) {
+		case SHIELD:
+			Shield shield = itemService.findShieldById(id);
+			if (shield != null) {
+				form.setDefPlus(shield.getDefPlus());
+				form.setAtkMinus(shield.getAtkMinus());
+				itemSetForForm(shield, form);
+			} else {
+				addErrorMsg(redirectAttrs, "error.notFoundItem");
+				return "redirect:/shop/items?id=" + pc.getId();
+			}
+			break;
+		case ARMOR:
+			Armor armor = itemService.findArmorById(id);
+			if (armor != null) {
+				form.setDefPlus(armor.getDefPlus());
+				form.setAtkMinus(armor.getAtkMinus());
+				form.setHealthPlus(armor.getHealthPlus());
+				itemSetForForm(armor, form);
+			} else {
+				addErrorMsg(redirectAttrs, "error.notFoundItem");
+				return "redirect:/shop/items?id=" + pc.getId();
+			}
+			break;
+		case WEAPON:
+			Weapon weapon = itemService.findWeaponById(id);
+			if (weapon != null) {
+
+				form.setAtk(weapon.getAtk());
+				form.setDef(weapon.getDef());
+				form.setDamage(weapon.getDamage());
+				itemSetForForm(weapon, form);
+			} else {
+				addErrorMsg(redirectAttrs, "error.notFoundItem");
+				return "redirect:/shop/items?id=" + pc.getId();
+			}
+			break;
+		case POTION:
+			break;
+		default:
+			break;
+
+		}
+
+		// model.addAttribute("playerCharacterId", pc.getId());
+		model.addAttribute("playerCharacter", pc);
+		model.addAttribute("form", form);
+
+		return "shop/item";
+
+		// return "shop/items";
+
+	}
+
+	private void itemSetForForm(Item item, ItemForm form) {
+		form.setId(item.getId());
+		form.setValue(item.getValue());
+		form.setWeight(item.getWeight());
+		form.setName(item.getName());
+		form.setType(item.getType());
+		form.setDescription(item.getDescription());
 
 	}
 

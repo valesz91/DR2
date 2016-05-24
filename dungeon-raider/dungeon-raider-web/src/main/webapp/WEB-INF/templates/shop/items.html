@@ -21,6 +21,24 @@
 				<form id="form" data-th-object="${form}" action="#" data-th-action="@{/shop/items.html}" method="get">
 
 					<div class="row">
+						<div class="col-xs-offset-3 col-xs-6">
+
+							<div
+								th:replace="fragments/forminput :: simple-row(field='gold', fieldSize='col-xs-3', label=#{item.gold}, labelSize='col-xs-6', required=true)"></div>
+						<div>
+										<label class="col-xs-5 control-label"> <span th:text="#{characters.maxLoadCapacity}">Label</span>
+										</label>
+										<div th:class="col-xs-3">
+<!-- 											<span th:text="${#numbers.formatDecimal(loadCapacity,1,1)} }"></span> -->
+												<span th:text="${playerCharacter.loadCapacity}"></span>
+										
+										</div>
+									</div>
+						</div>
+
+					</div>
+
+					<div class="row">
 						<div class="col-xs-6">
 							<div class="panel panel-default">
 								<div class="panel-heading">
@@ -62,7 +80,8 @@
 													<div class="btn-group" role="group">
 														<a th:href="@{/shop/buy.html(id=${item.id}, type=${item.type})}" href="#" class="btn btn-xs btn-info"><span th:text="#{shop.buy}"></span></a>
 														<a th:href="@{/shop/buyandequip.html(id=${item.id}, type=${item.type})}" class="btn btn-xs btn-default" href="#"><span th:text="#{shop.buyAndEquip}"></span></a>
-														<a class="btn btn-default btn-xs" data-toggle="modal" data-target="#viewModal" data-entity="${item}" data-th-text="#{shop.view}" role="button"><span th:text="#{item.view}"></span></a>
+															<a th:href="@{/shop/item.html(id=${item.id}, type=${item.type}, characterId=${playerCharacter.id})}"
+													class="btn btn-xs btn-info" href="#"><span th:text="#{item.view}"></span></a>
 													</div>
 												</td>
 											</tr>

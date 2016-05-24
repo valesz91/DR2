@@ -3,9 +3,17 @@ package hu.inf.unideb.dungeonraider.domain;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Item basic entity.
+ * 
+ * @author FV
+ *
+ */
 public class Item implements Serializable {
+
+	// CHECKSTYLE:OFF
 	/**
-	 * Serial
+	 * Serial.
 	 */
 	private static final long serialVersionUID = -1123293169831934855L;
 	private Integer id;

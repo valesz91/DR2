@@ -17,47 +17,47 @@ import hu.inf.unideb.dungeonraider.domain.PlayersCharacter;
  * @author fv
  */
 @Repository(&quot;playercharacterDao&quot;)
-<span class="fc" id="L20">public class PlayersCharacterDaoImpl extends HibernateDaoSupport implements PlayersCharacterDao {</span>
+<span class="nc" id="L20">public class PlayersCharacterDaoImpl extends HibernateDaoSupport implements PlayersCharacterDao {</span>
 
 	@Override
 	public PlayersCharacter findByNameAndPassword(String name, String password) {
 
-<span class="fc" id="L25">		DetachedCriteria criteria = DetachedCriteria.forClass(PlayersCharacter.class);</span>
-<span class="fc" id="L26">		criteria.add(Restrictions.eq(&quot;name&quot;, name));</span>
-<span class="fc" id="L27">		criteria.add(Restrictions.eq(&quot;password&quot;, password));</span>
+<span class="nc" id="L25">		DetachedCriteria criteria = DetachedCriteria.forClass(PlayersCharacter.class);</span>
+<span class="nc" id="L26">		criteria.add(Restrictions.eq(&quot;name&quot;, name));</span>
+<span class="nc" id="L27">		criteria.add(Restrictions.eq(&quot;password&quot;, password));</span>
 
 		@SuppressWarnings(&quot;unchecked&quot;)
-<span class="fc" id="L30">		List&lt;PlayersCharacter&gt; characters = (List&lt;PlayersCharacter&gt;) getHibernateTemplate().findByCriteria(criteria);</span>
-<span class="fc" id="L31">		return DataAccessUtils.singleResult(characters);</span>
+<span class="nc" id="L30">		List&lt;PlayersCharacter&gt; characters = (List&lt;PlayersCharacter&gt;) getHibernateTemplate().findByCriteria(criteria);</span>
+<span class="nc" id="L31">		return DataAccessUtils.singleResult(characters);</span>
 	}
 
 	@Override
 	public PlayersCharacter findByName(String name) {
 
-<span class="fc" id="L37">		DetachedCriteria criteria = DetachedCriteria.forClass(PlayersCharacter.class);</span>
-<span class="fc" id="L38">		criteria.add(Restrictions.eq(&quot;name&quot;, name));</span>
+<span class="nc" id="L37">		DetachedCriteria criteria = DetachedCriteria.forClass(PlayersCharacter.class);</span>
+<span class="nc" id="L38">		criteria.add(Restrictions.eq(&quot;name&quot;, name));</span>
 
 		@SuppressWarnings(&quot;unchecked&quot;)
-<span class="fc" id="L41">		List&lt;PlayersCharacter&gt; characters = (List&lt;PlayersCharacter&gt;) getHibernateTemplate().findByCriteria(criteria);</span>
-<span class="fc" id="L42">		return DataAccessUtils.singleResult(characters);</span>
+<span class="nc" id="L41">		List&lt;PlayersCharacter&gt; characters = (List&lt;PlayersCharacter&gt;) getHibernateTemplate().findByCriteria(criteria);</span>
+<span class="nc" id="L42">		return DataAccessUtils.singleResult(characters);</span>
 	}
 
 	@Override
 	public PlayersCharacter findById(Integer id) {
-<span class="fc" id="L47">		PlayersCharacter pc = getHibernateTemplate().get(PlayersCharacter.class, id);</span>
-<span class="fc" id="L48">		getHibernateTemplate().initialize(pc);</span>
-<span class="fc" id="L49">		return pc;</span>
+<span class="nc" id="L47">		PlayersCharacter pc = getHibernateTemplate().get(PlayersCharacter.class, id);</span>
+<span class="nc" id="L48">		getHibernateTemplate().initialize(pc);</span>
+<span class="nc" id="L49">		return pc;</span>
 	}
 
 	@Override
 	public void saveOrUpdatePlayersCharacter(PlayersCharacter character) {
-<span class="fc" id="L54">		getHibernateTemplate().saveOrUpdate(character);</span>
-<span class="fc" id="L55">	}</span>
+<span class="nc" id="L54">		getHibernateTemplate().saveOrUpdate(character);</span>
+<span class="nc" id="L55">	}</span>
 
 	@Override
 	public void deletePlayersCharacter(PlayersCharacter character) {
-<span class="fc" id="L59">		getHibernateTemplate().delete(character);</span>
-<span class="fc" id="L60">	}</span>
+<span class="nc" id="L59">		getHibernateTemplate().delete(character);</span>
+<span class="nc" id="L60">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

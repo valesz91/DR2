@@ -21,6 +21,12 @@ import hu.inf.unideb.dungeonraider.service.ItemException;
 import hu.inf.unideb.dungeonraider.service.ItemService;
 import hu.inf.unideb.dungeonraider.service.MissingEntityException;
 
+/**
+ * Default implementation of item service.
+ * 
+ * @author FV
+ *
+ */
 @Service("itemService")
 public class ItemServiceImpl implements ItemService {
 
@@ -187,6 +193,24 @@ public class ItemServiceImpl implements ItemService {
 		}
 
 		characterDao.saveOrUpdatePlayersCharacter(pc);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Armor findArmorById(Integer id) {
+		return itemDao.findArmorById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Shield findShieldById(Integer id) {
+		return itemDao.findShieldById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Weapon findWeaponById(Integer id) {
+		return itemDao.findWeaponById(id);
 	}
 
 	@Transactional

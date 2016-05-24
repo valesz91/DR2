@@ -9,7 +9,7 @@
 	<artifactId>dungeon-raider-web</artifactId>
 	<packaging>war</packaging>
 
-	<name>Dungeon Raider Project</name>
+	<name>Dungeon Raider Web Module</name>
 
 	<build>
 		<plugins>

@@ -2,10 +2,18 @@ package hu.inf.unideb.dungeonraider.domain;
 
 import java.util.List;
 
+/**
+ * The players character in the game.
+ * 
+ * @author FV
+ *
+ */
+// CHECKSTYLE:OFF
+
 public class PlayersCharacter extends Creature {
 
 	/**
-	 * Serial
+	 * Serial.
 	 */
 	private static final long serialVersionUID = 8352076718627811388L;
 	private String password;

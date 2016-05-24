@@ -1,9 +1,17 @@
 package hu.inf.unideb.dungeonraider.domain;
 
+/**
+ * The potion entity.
+ * 
+ * @author FV
+ *
+ */
+// CHECKSTYLE:OFF
+
 public class Potion extends Item {
 
 	/**
-	 * Serial
+	 * Serial.
 	 */
 	private static final long serialVersionUID = -7634093529458677398L;
 	private PotionType potionType;

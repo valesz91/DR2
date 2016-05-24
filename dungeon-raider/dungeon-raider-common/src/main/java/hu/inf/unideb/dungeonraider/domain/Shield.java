@@ -1,5 +1,14 @@
 package hu.inf.unideb.dungeonraider.domain;
 
+/**
+ * The shield entity.
+ * 
+ * @author FV
+ *
+ */
+
+// CHECKSTYLE:OFF
+
 public class Shield extends Item {
 
 	/**

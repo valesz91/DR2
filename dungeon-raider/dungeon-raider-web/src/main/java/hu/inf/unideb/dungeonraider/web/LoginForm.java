@@ -6,6 +6,8 @@ package hu.inf.unideb.dungeonraider.web;
  * @author FV
  *
  */
+
+// CHECKSTYLE:OFF
 public class LoginForm {
 	private String name;
 	private String password;

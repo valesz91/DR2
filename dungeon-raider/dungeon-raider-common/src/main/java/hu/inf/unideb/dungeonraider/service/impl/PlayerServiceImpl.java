@@ -22,6 +22,12 @@ import hu.inf.unideb.dungeonraider.service.ItemException;
 import hu.inf.unideb.dungeonraider.service.MissingEntityException;
 import hu.inf.unideb.dungeonraider.service.PlayerService;
 
+/**
+ * Default implementation of player service.
+ * 
+ * @author FV
+ *
+ */
 @Service("playerService")
 public class PlayerServiceImpl implements PlayerService {
 
@@ -93,6 +99,9 @@ public class PlayerServiceImpl implements PlayerService {
 		}
 		switch (type) {
 		case SHIELD:
+			if (pc.getActualShield() != null) {
+				unEquipItem(ItemType.SHIELD, pc.getActualShield().getId(), pc.getId());
+			}
 			Shield toEquipS = itemDao.findShieldById(itemId);
 			if (pc.getShields().contains(toEquipS)) {
 				pc.getShields().remove(toEquipS);
@@ -110,6 +119,9 @@ public class PlayerServiceImpl implements PlayerService {
 			}
 
 		case ARMOR:
+			if (pc.getActualArmor() != null) {
+				unEquipItem(ItemType.ARMOR, pc.getActualArmor().getId(), pc.getId());
+			}
 			Armor toEquipA = itemDao.findArmorById(itemId);
 			if (pc.getArmors().contains(toEquipA)) {
 				pc.getArmors().remove(toEquipA);
@@ -128,6 +140,9 @@ public class PlayerServiceImpl implements PlayerService {
 
 			}
 		case WEAPON:
+			if (pc.getActualWeapon() != null) {
+				unEquipItem(ItemType.WEAPON, pc.getActualWeapon().getId(), pc.getId());
+			}
 			Weapon toEquipW = itemDao.findWeaponById(itemId);
 			if (pc.getWeapons().contains(toEquipW)) {
 				pc.getWeapons().remove(toEquipW);
@@ -164,32 +179,45 @@ public class PlayerServiceImpl implements PlayerService {
 		}
 		switch (type) {
 		case SHIELD:
-			Shield toEquipS = itemDao.findShieldById(itemId);
-			if (pc.getShields().contains(toEquipS)) {
-				pc.getShields().remove(toEquipS);
-				pc.setLoadCapacity(pc.getLoadCapacity() - toEquipS.getWeight());
-
-				characterDao.saveOrUpdatePlayersCharacter(pc);
-				return true;
+			if (pc.getActualShield() != null) {
+				if (pc.getActualShield().getId() == itemId) {
+					unEquipItem(ItemType.SHIELD, pc.getActualShield().getId(), pc.getId());
+				}
 			}
+			Shield toDropS = itemDao.findShieldById(itemId);
+			if (pc.getShields().contains(toDropS)) {
+				pc.getShields().remove(toDropS);
+			}
+			itemDao.saveOrUpdateShield(toDropS);
+			characterDao.saveOrUpdatePlayersCharacter(pc);
+			return true;
+
 		case ARMOR:
-			Armor toEquipA = itemDao.findArmorById(itemId);
-			if (pc.getArmors().contains(toEquipA)) {
-				pc.getArmors().remove(toEquipA);
-				pc.setLoadCapacity(pc.getLoadCapacity() - toEquipA.getWeight());
-
-				characterDao.saveOrUpdatePlayersCharacter(pc);
-				return true;
+			if (pc.getActualArmor() != null) {
+				if (pc.getActualArmor().getId() == itemId) {
+					unEquipItem(ItemType.ARMOR, pc.getActualArmor().getId(), pc.getId());
+				}
 			}
-
+			Armor toDropA = itemDao.findArmorById(itemId);
+			if (pc.getArmors().contains(toDropA)) {
+				pc.getArmors().remove(toDropA);
+			}
+			itemDao.saveOrUpdateArmor(toDropA);
+			characterDao.saveOrUpdatePlayersCharacter(pc);
+			return true;
 		case WEAPON:
-			Weapon toEquipW = itemDao.findWeaponById(itemId);
-			if (pc.getWeapons().contains(toEquipW)) {
-				pc.getWeapons().remove(toEquipW);
-				pc.setLoadCapacity(pc.getLoadCapacity() - toEquipW.getWeight());
-				characterDao.saveOrUpdatePlayersCharacter(pc);
-				return true;
+			if (pc.getActualWeapon() != null) {
+				if (pc.getActualWeapon().getId() == itemId) {
+					unEquipItem(ItemType.WEAPON, pc.getActualWeapon().getId(), pc.getId());
+				}
 			}
+			Weapon toDropW = itemDao.findWeaponById(itemId);
+			if (pc.getWeapons().contains(toDropW)) {
+				pc.getWeapons().remove(toDropW);
+			}
+			itemDao.saveOrUpdateWeapon(toDropW);
+			characterDao.saveOrUpdatePlayersCharacter(pc);
+			return true;
 		case POTION:
 			break;
 		}
@@ -221,6 +249,7 @@ public class PlayerServiceImpl implements PlayerService {
 
 				pc.setAttackPoints(pc.getAttackPoints() - toUnEquipS.getAtkMinus());
 				pc.setDamagePoints(pc.getDamagePoints() - toUnEquipS.getDefPlus());
+				itemDao.saveOrUpdateShield(toUnEquipS);
 				characterDao.saveOrUpdatePlayersCharacter(pc);
 				return true;
 			} else {
@@ -237,7 +266,9 @@ public class PlayerServiceImpl implements PlayerService {
 				pc.setAttackPoints(pc.getAttackPoints() - toUnEquipA.getAtkMinus());
 				pc.setDamagePoints(pc.getDamagePoints() - toUnEquipA.getDefPlus());
 				pc.setHealth(pc.getHealth() - toUnEquipA.getHealthPlus());
+				itemDao.saveOrUpdateArmor(toUnEquipA);
 				characterDao.saveOrUpdatePlayersCharacter(pc);
+
 				return true;
 			} else {
 				throw new ItemException();
@@ -252,6 +283,7 @@ public class PlayerServiceImpl implements PlayerService {
 				pc.setAttackPoints(pc.getAttackPoints() - toUnEquipW.getAtk());
 				pc.setDamagePoints(pc.getDamagePoints() - toUnEquipW.getDef());
 				pc.setDamagePoints(pc.getDamagePoints() - toUnEquipW.getDamage());
+				itemDao.saveOrUpdateWeapon(toUnEquipW);
 				characterDao.saveOrUpdatePlayersCharacter(pc);
 				return true;
 

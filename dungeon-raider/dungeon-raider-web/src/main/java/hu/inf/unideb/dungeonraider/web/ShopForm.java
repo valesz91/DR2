@@ -7,14 +7,63 @@ import hu.inf.unideb.dungeonraider.domain.Potion;
 import hu.inf.unideb.dungeonraider.domain.Shield;
 import hu.inf.unideb.dungeonraider.domain.Weapon;
 
+/**
+ * Form entity for shop wiews.
+ * 
+ * @author FV
+ *
+ */
 public class ShopForm {
 
+	/** List of all armors. */
 	private List<Armor> armors;
+	/** List of all shield. */
+
 	private List<Shield> shields;
+	/** List of all weapons. */
+
 	private List<Weapon> weapons;
+	/** List of all potions. */
+
 	private List<Potion> potions;
+
+	/** Selector for show only armors wich for the players character has enoug money. */
+	private Boolean armorCanBuy = false;
+	/** Selector for show only weapons wich for the players character has enoug money. */
+
+	private Boolean weaponCanBuy = false;
+	/** Selector for show only shields wich for the players character has enoug money. */
+
+	private Boolean shieldCanBuy = false;
+	/** Selector for show only potionss wich for the players character has enoug money. */
+
+	private Boolean potionCanBuy = false;
+
+	/** The player ID. */
+	private Integer playerId;
+	/** Unused id. Occures problems on the shop layout, so it was disabled. */
 	private Integer characterId;
 
+	private Integer gold;
+	private Double loadCapacity;
+
+	public Integer getGold() {
+		return gold;
+	}
+
+	public void setGold(Integer gold) {
+		this.gold = gold;
+	}
+
+	public Double getLoadCapacity() {
+		return loadCapacity;
+	}
+
+	public void setLoadCapacity(Double loadCapacity) {
+		this.loadCapacity = loadCapacity;
+	}
+
+	// CHECKSTYLE:OFF
 	public Integer getCharacterId() {
 		return characterId;
 	}
@@ -22,13 +71,6 @@ public class ShopForm {
 	public void setCharacterId(Integer characterId) {
 		this.characterId = characterId;
 	}
-
-	private Boolean armorCanBuy = false;
-	private Boolean weaponCanBuy = false;
-	private Boolean shieldCanBuy = false;
-	private Boolean potionCanBuy = false;
-
-	private Integer playerId;
 
 	public List<Potion> getPotions() {
 		return potions;
@@ -101,5 +143,6 @@ public class ShopForm {
 	public void setWeapons(List<Weapon> weapons) {
 		this.weapons = weapons;
 	}
+	// CHECKSTYLE:ON
 
 }

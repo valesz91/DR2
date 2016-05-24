@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: hu.inf.unideb.dungeonraider.dao.ItemDaoTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.295 sec
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.998 sec

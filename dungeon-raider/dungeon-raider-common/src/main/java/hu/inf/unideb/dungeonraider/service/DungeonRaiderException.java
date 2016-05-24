@@ -1,5 +1,7 @@
 package hu.inf.unideb.dungeonraider.service;
 
+// CHECKSTYLE:OFF
+
 public class DungeonRaiderException extends RuntimeException {
 
 	/** Serial number */

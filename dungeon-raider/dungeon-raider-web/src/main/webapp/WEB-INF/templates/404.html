@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title data-th-text="#{application.title} + ' - ' + #{accessDenied.title}">VRM - Permission denied!</title>
+<title data-th-text="#{application.title} + ' - ' + #{accessDenied.title}">Permission denied!</title>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
 <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
@@ -13,7 +13,7 @@
 </head>
 <body>
 	<nav data-th-replace="fragments/navbar :: navbar"></nav>
-	<div class="container vm-wrapper">
+	<div class="container">
 		<div class="page-header"><h1 data-th-text="#{validation.404title}">Service unreachable</h1></div>
 		<p data-th-text="#{validation.404}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non tortor ac quam vestibulum euismod a at magna. Integer hendrerit massa vel est iaculis, at ornare metus blandit. Duis pellentesque purus metus, vitae semper sem aliquet a. Sed quis vulputate ex. Sed viverra mauris enim, eu vehicula sem accumsan et. In sed neque et est condimentum gravida. Maecenas pharetra auctor velit, sed laoreet elit eleifend eget.</p>
 	</div>

@@ -13,7 +13,8 @@
 		<name>University of Debrecen</name>
 		<url>http://www.unideb.hu</url>
 	</organization>
-
+	<description>This project created for the complete the minium requirements of  Programing Enviroment's course. This is a basic  Role Playing Game  where you can create a character, equiped it with items (shield, armor, weapon etc.) and go to an adventure into the dungeon! Unfortunatelly, the game was infinished yet, so you only can create your character and equip items in the shop.</description>
+	<url>http://www.inf.unideb.hu/~jeszy/progkorny/</url>
 	<developers>
 		
 		<developer>
@@ -27,9 +28,9 @@
 	</developers>
 
 	<scm>
-		<connection>scm:https://github.com/valesz91/DungeonRaiderRepo.gitt</connection>
-		<developerConnection>scm:https://github.com/valesz91/DungeonRaiderRepo.git</developerConnection>
-		<url>https://github.com/valesz91/DungeonRaiderRepo.git</url>
+		<connection>scm:https://github.com/valesz91/DR2.git</connection>
+		<developerConnection>scm:https://github.com/valesz91/DR2.git</developerConnection>
+		<url>https://github.com/valesz91/DR2.git</url>
 	</scm>
 	
 	<distributionManagement>

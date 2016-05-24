@@ -32,9 +32,9 @@ import hu.inf.unideb.dungeonraider.service.PlayerService;
 // @SessionAttributes(types = ShopForm.class)
 public class CharacterController extends AbstractController {
 
-	/** SLF4J Logger */
+	/** SLF4J Logger. */
 	private final Logger log = LoggerFactory.getLogger(CharacterController.class);
-
+	/** The <code>autowired</code> player service <code>spring enterprise bean</code>. */
 	@Autowired
 	private PlayerService playerService;
 
@@ -59,11 +59,12 @@ public class CharacterController extends AbstractController {
 	}
 
 	/**
-	 * Character create submission
+	 * Character create submission.
 	 * 
 	 * @param model the model
 	 * @param form the character form
 	 * @param errors the errors
+	 * @param redirectAttrs the redirect attributes
 	 * @return the view name
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = "text/html")
@@ -127,22 +128,40 @@ public class CharacterController extends AbstractController {
 			log.error("Internal problem occured while handled chracter submision.");
 			return "redirect:/500.html";
 		}
-		CharacterForm form = new CharacterForm();
+		EditForm form = new EditForm();
 		form.setName(pc.getName());
-		// form.setActualArmor(pc.getActualArmor());
-		// form.setActualShield(pc.getActualShield());
-		// form.setActualWeapon(pc.getActualWeapon());
+		form.setActualExp(pc.getActualExp());
+		form.setArmors(pc.getArmors());
+		form.setAttackPoints(pc.getAttackPoints());
+		form.setDamagePoints(pc.getDamagePoints());
+		form.setDefendPoints(pc.getDefendPoints());
+		form.setDexterity(pc.getDexterity());
+		form.setGold(pc.getGold());
+		form.setHealth(pc.getHealth());
+		form.setHealthPoint(pc.getHealthPoint());
+		form.setId(pc.getId());
+		form.setInventory(pc.getInventory());
+		form.setLoadCapacity(pc.getLoadCapacity());
+		form.setPotions(pc.getPotions());
+		form.setQuickness(pc.getQuickness());
+		form.setShields(pc.getShields());
+		form.setStrength(pc.getStrength());
+		form.setWeapons(pc.getWeapons());
+		form.setActualArmor(pc.getActualArmor());
+		form.setActualShield(pc.getActualShield());
+		form.setActualWeapon(pc.getActualWeapon());
 		form.setRace(pc.getRace());
-		model.addAttribute("form", pc);
+		model.addAttribute("form", form);
 		model.addAttribute("itemsWeights", playerService.calculateItemsWeightByCharacter(pc.getId()));
 		model.addAttribute("playerCharacter", pc);
 
+		model.addAttribute("characterId", pc.getId());
 		return "characters/edit";
 
 	}
 
 	/**
-	 * Handling itemg and equipping submission.
+	 * Handling item equipping submission.
 	 * 
 	 * @param model the model
 	 * @param id the chracter id
@@ -152,9 +171,9 @@ public class CharacterController extends AbstractController {
 	 * @return the view name
 	 */
 	@RequestMapping(value = "/equip", method = RequestMethod.GET, produces = "text/html")
-	public String equipItem(Model model, @RequestParam("id") int id, @RequestParam("type") ItemType type, PlayersCharacter prototype,
-			RedirectAttributes redirectAttrs) {
-		PlayersCharacter pc = playerService.findById(prototype.getId());
+	public String equipItem(Model model, @RequestParam("id") int id, @RequestParam("type") ItemType type,
+			@RequestParam("characterId") Integer characterId, EditForm form, RedirectAttributes redirectAttrs) {
+		PlayersCharacter pc = playerService.findById(characterId);
 		if (pc == null) {
 			log.error("Internal problem occured while handled characters item equip submision. Character not found.");
 			addErrorMsg(redirectAttrs, "error.notFoundCharacter");
@@ -162,25 +181,36 @@ public class CharacterController extends AbstractController {
 		}
 
 		try {
-			playerService.equipItem(type, id, prototype.getId());
+			playerService.equipItem(type, id, pc.getId());
 		} catch (MissingEntityException ex) {
-
+			System.out.println("Catch");
 			log.error("Internal problem occured while handled characters item equipping.");
 			addErrorMsg(redirectAttrs, "error.cantEquiped");
 			return "redirect:/characters/edit?id=" + pc.getId();
 		}
 		addSuccessMsg(redirectAttrs, "success.itemEquipped");
 
-		model.addAttribute("form", pc);
+		// model.addAttribute("form", pc);
+		System.out.println(pc.getId());
 		return "redirect:/characters/edit?id=" + pc.getId();
 		// return "shop/items";
 
 	}
 
+	/**
+	 * Handling dropping mehtod submission.
+	 * 
+	 * @param model the model
+	 * @param id the chracter id
+	 * @param type the item type
+	 * @param prototype the players character prototype
+	 * @param redirectAttrs the redirect attributes
+	 * @return the view name
+	 */
 	@RequestMapping(value = "/drop", method = RequestMethod.GET, produces = "text/html")
-	public String dropItem(Model model, @RequestParam("id") int id, @RequestParam("type") ItemType type, PlayersCharacter prototype,
-			RedirectAttributes redirectAttrs) {
-		PlayersCharacter pc = playerService.findById(prototype.getId());
+	public String dropItem(Model model, @RequestParam("id") int id, @RequestParam("type") ItemType type,
+			@RequestParam("characterId") Integer characterId, RedirectAttributes redirectAttrs) {
+		PlayersCharacter pc = playerService.findById(characterId);
 		if (pc == null) {
 			log.error("Internal problem occured while handled characters item drop submision. Character not found.");
 			addErrorMsg(redirectAttrs, "error.notFoundCharacter");
@@ -188,23 +218,14 @@ public class CharacterController extends AbstractController {
 		}
 
 		try {
-			playerService.unEquipItem(type, id, prototype.getId());
+			playerService.dropItem(type, id, characterId);
 		} catch (MissingEntityException ex) {
 
 			log.error("Internal problem occured while handled characters item unEquipping.");
 			addErrorMsg(redirectAttrs, "error.cantEquiped");
 			return "redirect:/characters/edit?id=" + pc.getId();
 		}
-		addSuccessMsg(redirectAttrs, "success.itemUnEquipped");
-		try {
-			playerService.dropItem(type, id, prototype.getId());
-		} catch (MissingEntityException ex) {
-
-			log.error("Internal problem occured while handled characters item unEquipping.");
-			addErrorMsg(redirectAttrs, "error.cantEquiped");
-			return "redirect:/characters/edit?id=" + pc.getId();
-		}
-		addSuccessMsg(redirectAttrs, "success.itemUnEquipped");
+		addSuccessMsg(redirectAttrs, "success.itemDropped");
 
 		model.addAttribute("form", pc);
 		return "redirect:/characters/edit?id=" + pc.getId();

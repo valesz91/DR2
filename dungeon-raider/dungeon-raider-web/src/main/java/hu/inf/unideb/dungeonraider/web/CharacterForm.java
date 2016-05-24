@@ -11,6 +11,7 @@ import hu.inf.unideb.dungeonraider.domain.Race;
  * @author FV
  *
  */
+// CHECKSTYLE:OFF
 public class CharacterForm {
 
 	private String password;

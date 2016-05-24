@@ -3,6 +3,14 @@ package hu.inf.unideb.dungeonraider.domain;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Basic map element class for movement operations.
+ * 
+ * @author FV
+ *
+ */
+// CHECKSTYLE:OFF
+
 public class MapElement implements Serializable {
 	/**
 	 * Serial

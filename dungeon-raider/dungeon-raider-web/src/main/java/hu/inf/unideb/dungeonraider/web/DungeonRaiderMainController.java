@@ -26,14 +26,15 @@ import hu.inf.unideb.dungeonraider.service.PlayerService;
 @SessionAttributes(types = LoginForm.class)
 public class DungeonRaiderMainController {
 
+	/** The <code>autowired</code> player service <code>spring enterprise bean</code>. */
 	@Autowired
 	private PlayerService playerService;
 
-	/** SLF4J Logger */
+	/** SLF4J Logger. */
 	private final Logger log = LoggerFactory.getLogger(DungeonRaiderMainController.class);
 
 	/**
-	 * Login display
+	 * Login display.
 	 * 
 	 * @param form the login form with field to login
 	 * @param model the model
@@ -49,7 +50,7 @@ public class DungeonRaiderMainController {
 	}
 
 	/**
-	 * Login form submit
+	 * Login form submit.
 	 * 
 	 * @param form the login form
 	 * @param model the model
@@ -80,7 +81,7 @@ public class DungeonRaiderMainController {
 	}
 
 	/**
-	 * New character handler
+	 * New character handler.
 	 * 
 	 * @param model the model
 	 * @return the create view name

@@ -3,11 +3,18 @@ package hu.inf.unideb.dungeonraider.domain;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Creature basic entity.
+ * 
+ * @author FV
+ *
+ */
 public class Creature implements Serializable {
 
 	/**
-	 * Serial
+	 * Serial.
 	 */
+	// CHECKSTYLE:OFF
 	private static final long serialVersionUID = 9058531437460699406L;
 	private Integer id;
 	private Integer attackPoints;

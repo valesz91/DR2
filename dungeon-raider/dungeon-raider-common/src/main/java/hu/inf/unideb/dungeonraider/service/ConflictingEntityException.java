@@ -3,9 +3,10 @@ package hu.inf.unideb.dungeonraider.service;
 import java.util.Arrays;
 import java.util.Collection;
 
+// CHECKSTYLE:OFF
 public class ConflictingEntityException extends DungeonRaiderException {
 
-	/** Serial */
+	/** Serial. */
 	private static final long serialVersionUID = 7651544944892404946L;
 
 	/** Collection of conflicting property names */
@@ -30,7 +31,7 @@ public class ConflictingEntityException extends DungeonRaiderException {
 	}
 
 	/**
-	 * @returnt he collection of conflicting property names
+	 * @return the collection of conflicting property names
 	 */
 	public Collection<String> getPropertyNames() {
 		return propertyNames;

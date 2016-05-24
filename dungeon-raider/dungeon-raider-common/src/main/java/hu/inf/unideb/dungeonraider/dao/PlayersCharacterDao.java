@@ -2,10 +2,16 @@ package hu.inf.unideb.dungeonraider.dao;
 
 import hu.inf.unideb.dungeonraider.domain.PlayersCharacter;
 
+/**
+ * Default interface of the players character dao.
+ * 
+ * @author FV
+ *
+ */
 public interface PlayersCharacterDao {
 
 	/**
-	 * Find a player's character by name and password
+	 * Find a player's character by name and password.
 	 * 
 	 * @param name the characters name
 	 * @param password the password for this character

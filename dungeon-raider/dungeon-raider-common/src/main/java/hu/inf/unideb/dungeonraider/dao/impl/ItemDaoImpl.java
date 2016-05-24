@@ -14,6 +14,12 @@ import hu.inf.unideb.dungeonraider.domain.Potion;
 import hu.inf.unideb.dungeonraider.domain.Shield;
 import hu.inf.unideb.dungeonraider.domain.Weapon;
 
+/**
+ * Default implementation of item dao.
+ * 
+ * @author FV
+ *
+ */
 public class ItemDaoImpl extends HibernateDaoSupport implements ItemDao {
 
 	@Override

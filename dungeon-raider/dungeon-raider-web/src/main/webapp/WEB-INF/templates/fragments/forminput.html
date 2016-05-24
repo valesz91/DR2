@@ -22,6 +22,14 @@
 		</div>
 	</div>
 	
+	<div th:fragment="textarea (field, label, rows, readonly)">
+		<div class="form-group">
+			<label for="description" class="control-label"><span th:text="${label}"></span></label> 
+			<textarea th:if="${readonly}" class="form-control" th:rows="${rows}"  th:field="*{__${field}__}" readonly="readonly"></textarea>
+			<textarea th:unless="${readonly}" class="form-control" th:rows="${rows}"  th:field="*{__${field}__}"></textarea>
+		</div>
+	
+	</div>
 	<div class="row" th:fragment="simple-rowName (field, fieldSize, label, labelSize)">
 		<label th:class="${'__${labelSize}__'} +' control-label'"> <span th:text="${label}">Label</span>
 		</label>

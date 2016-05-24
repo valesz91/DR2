@@ -1,8 +1,16 @@
 package hu.inf.unideb.dungeonraider.domain;
 
+/**
+ * The weapon entity.
+ * 
+ * @author FV
+ *
+ */
+// CHECKSTYLE:OFF
+
 public class Weapon extends Item {
 	/**
-	 * Serial
+	 * Serial.
 	 */
 	private static final long serialVersionUID = -1768624967790877296L;
 	private Integer atk;

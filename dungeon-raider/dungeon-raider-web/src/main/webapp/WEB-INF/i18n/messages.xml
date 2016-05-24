@@ -45,6 +45,7 @@
 	<entry key="item.drop">Drop</entry>
 	<entry key="item.equip">Equip</entry>
 
+	<entry key="item.view">View</entry>
 	<entry key="item.shield">Shield</entry>
 	<entry key="item.weapon">Weapon</entry>
 	<entry key="item.armor">Armor</entry>

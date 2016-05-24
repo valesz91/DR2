@@ -1,5 +1,7 @@
 package hu.inf.unideb.dungeonraider.service;
 
+// CHECKSTYLE:OFF
+
 public class ItemException extends DungeonRaiderException {
 
 	private static final long serialVersionUID = 1L;

@@ -16,6 +16,7 @@
 	<entry key="success.characterCreate">Character successfully created!</entry>
 	<entry key="success.itemBuyed">Item buyed!</entry>
 	<entry key="success.itemEquipped">Item Equipped!</entry>
+	<entry key="success.itemDropped">Item dropped!</entry>
 	<entry key="error.youHaveNotEnoughGold">You have not enough gold to buy this item!</entry>
 	<entry key="error.tooHeawyItem">You carry too much items!</entry>
 </properties>
